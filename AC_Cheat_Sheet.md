@@ -1,3 +1,31 @@
+# Kerbrute
+
+## User Enum
+
+```
+./kerbrute userenum -d spookysec.local --dc 10.10.3.190 userlist.txt
+
+    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ \/ ___/ __ \/ ___/ / / / __/ _ \
+ / ,< /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/|_|\___/_/  /_.___/_/   \__,_/\__/\___/                                        
+
+Version: v1.0.3 (9dad6e1) - 12/14/21 - Ronnie Flathers @ropnop
+
+2021/12/14 08:36:23 >  Using KDC(s):
+2021/12/14 08:36:23 >   10.10.3.190:88
+
+2021/12/14 08:36:24 >  [+] VALID USERNAME:       james@spookysec.local
+2021/12/14 08:36:35 >  [+] VALID USERNAME:       svc-admin@spookysec.local
+2021/12/14 08:36:44 >  [+] VALID USERNAME:       James@spookysec.local
+2021/12/14 08:36:47 >  [+] VALID USERNAME:       robin@spookysec.local
+2021/12/14 08:37:16 >  [+] VALID USERNAME:       darkstar@spookysec.local
+2021/12/14 08:37:33 >  [+] VALID USERNAME:       administrator@spookysec.local
+2021/12/14 08:38:08 >  [+] VALID USERNAME:       backup@spookysec.local
+2021/12/14 08:38:24 >  [+] VALID USERNAME:       paradox@spookysec.local
+```
+
 # Remote Desk Top
 specifying domain with `-d` flag may be important
 
