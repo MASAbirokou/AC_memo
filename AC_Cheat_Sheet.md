@@ -107,6 +107,8 @@ mimikatz # privilege::debug
 mimikatz # sekurlsa::logonpasswords
 ```
 
+（`sekurlsa::logonpasswords`はそこまで出力内容は変わらないが、`sekurlsa::logonpasswords`よりも冗長）
+
 [*]Try both TaksManager way and Mimikatz way. They probably result in different.
 
 # Service Account Attacks (passwords of http, mysql, ftp...)
