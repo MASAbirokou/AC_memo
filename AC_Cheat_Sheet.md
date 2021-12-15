@@ -282,6 +282,7 @@ corp¥offsec S-1-5-21-1602875587-2787523311-2599479668-1103
 
 ### Golden Ticket Crafting
 I make the original TGT namely **Golden Ticket**.
+
 This needs **krbtgt's hash**.
 
 Get the krbtgt's hash:
