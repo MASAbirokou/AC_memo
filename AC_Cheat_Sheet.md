@@ -72,7 +72,10 @@ xfreerdp /u:sqlServer /p:shantewhite /v:10.11.1.121
 > グループメンバーシップを列挙し、ユーザが現在ログインしているマシンを特定できるよ うになったので、ユーザアカウント侵害を開始するために必要な基本スキルを身につける ことができました。最終目的はドメイン管理者権限の獲得です。
 
 
-# LSASS Attack
+# LSASS Attack (Local Security Authority Subsystem Service)
+
+（Microsoft の Kerberos の実装ではシングルサインオンを採用しているため、TGT 要求を更新するためにパスワードハッシュをどこかに保存しておく必要がある）
+（シングルサインオン...1度ユーザー認証 (ログイン)を行うと、複数のシステムを利用開始する際に都度認証を行う必要がない仕組み）
 
 ## Using TaskManager
 On Windows machine (that's to say open the Windows OS by remote desktop):
