@@ -107,7 +107,7 @@ mimikatz # privilege::debug
 mimikatz # sekurlsa::logonpasswords
 ```
 
-（`sekurlsa::logonpasswords`はそこまで出力内容は変わらないが、`sekurlsa::logonpasswords`よりも冗長）
+（`sekurlsa::logonpasswords`はそこまで出力内容は変わらないが、`sekurlsa::logonpasswords`よりも冗長。あ、でもlogonpasswordsの方は”クリアパスワード”が出ることもある。）
 
 [*]Try both TaksManager way and Mimikatz way. They probably result in different.
 
