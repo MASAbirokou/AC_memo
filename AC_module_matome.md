@@ -223,6 +223,8 @@ Overpass the hashとは、NTLM のユーザハッシュを「オーバー」悪�
 
 overpass the hash テクニックの本質は、NTLM ハッシュを Kerberos チケットに変換し、 NTLM 認証を回避することにあります。これを行なう簡単な方法は、やはり Mimikatz の sekurlsa::pth コマンドです。
 
+> これを説明するために、Jeff_Admin ユーザが認証したワークステーション(またはサーバ) を侵害し、そのマシンが認証情報(つまり NTLM パスワードハッシュ)をキャッシュしてい る場合を想定します。
+
 Converting NTLM hash to TGT and get another user's shell. 
 
 (That user's hash can be got by `sekurlsa::logonpasswords`.)
