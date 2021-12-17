@@ -219,7 +219,7 @@ pth-winexe -U Administrator%aad3b435b51404eeaad3b435b51404ee:2892d26cdf84d7a70e2
 
 ## Over Pass The Hash
 
-Overpass the hash673とは、NTLM のユーザハッシュを「オーバー」悪用して、完全な Kerberos の Ticket Granting Ticket(TGT)やサービスチケットを獲得することであり、これにより、 そのユーザとして別のマシンやサービスにアクセスすることが可能となります。
+Overpass the hashとは、NTLM のユーザハッシュを「オーバー」悪用して、完全な Kerberos の Ticket Granting Ticket(TGT)やサービスチケットを獲得することであり、これにより、 そのユーザとして別のマシンやサービスにアクセスすることが可能となります。
 
 overpass the hash テクニックの本質は、NTLM ハッシュを Kerberos チケットに変換し、 NTLM 認証を回避することにあります。これを行なう簡単な方法は、やはり Mimikatz の sekurlsa::pth コマンドです。
 
