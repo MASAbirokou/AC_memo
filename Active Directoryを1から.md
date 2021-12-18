@@ -89,5 +89,8 @@ C:\Windows\system32>ipconfig
    Default Gateway . . . . . . . . . : 10.11.0.1
 ```
 
+ここまでで、10.11.1.123, 10.11.1.121, 10.11.1.122を攻略できた。ということは、残すはDomain Adminsの10.11.1.123だ！
 
 mimikatzはここら辺にしておいて、PowerViewでActive Directoryの調査を進める。最終ゴールはDoamin Adminsに行き着くこと！！
+
+
