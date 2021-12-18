@@ -55,7 +55,15 @@ SID               : S-1-5-21-3051798232-4248191986-2095020414-500
 しかし、**Kerberoasができた！** （`Invoke-Kerberoast`でkrb5tgs型のハッシュをとって変換してhashcatでクラックするやつ）
 
 
-# ラテラルムーブメント（サービスアカウント10.11.1.121へ）
+# 10.11.1.121 (サービスアカウント）
+
+xor-app23としてrdpじゃなくて、サービスアカウントSQLServer（PowerViewの`Get-NetUser`で表示）としてrdpでドメインをきちんと指定してアクセス：（10.11.1.121がxor-app23と分かったのは、
+autoreconのnmapの結果）
+
+```
+┌──(kali㉿kali)-[~]
+└─$ rdesktop -d xor.com -u SQLServer -p shantewhite 10.11.1.121
+```
 
 
 
