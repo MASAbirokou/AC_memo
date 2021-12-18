@@ -65,20 +65,29 @@ autoreconのnmapの結果）
 └─$ rdesktop -d xor.com -u SQLServer -p shantewhite 10.11.1.121
 ```
 
+このSQLServerユーザでログインするとproof.txtが読める、すなわち10.11.1.121のadmin権限がある。（コマンドプロンプトを**Run as Administrator**として開ける）
+
+**System権限にも関わらずmimikatzの`sekurlsa::logonpasswords`が効かない場合は、mimikatzの新しい方（mimikatz211.exe）を使え！** （<- 古いmimikatzにある問題だって。）
 
 
+**daisyのrdpファイル発見。** mimikatzにより、daisyのパスワードが**XorPasswordIsDead17**と判明。
 
 
+＜daisyについて＞
+
+すでにsystem権限（IPアドレスは10.11.1.122)。
+
+```
+C:\Windows\system32>whoami
+xor\daisy
+
+C:\Windows\system32>ipconfig
+
+   Connection-specific DNS Suffix  . :
+   IPv4 Address. . . . . . . . . . . : 10.11.1.122
+   Subnet Mask . . . . . . . . . . . : 255.255.0.0
+   Default Gateway . . . . . . . . . : 10.11.0.1
+```
 
 
-
-
-
-
-
-
-
-
-
-
-
+mimikatzはここら辺にしておいて、PowerViewでActive Directoryの調査を進める。最終ゴールはDoamin Adminsに行き着くこと！！
