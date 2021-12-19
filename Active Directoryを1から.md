@@ -95,6 +95,12 @@ C:\Windows\system32>ipconfig
 
 mimikatzはここら辺にしておいて、PowerViewでActive Directoryの調査を進める。最終ゴールはDoamin Adminsに行き着くこと！！
 
+
+＜daisy上でBlood Houndしてみた＞
+
+![Hound_on_Daisy](https://user-images.githubusercontent.com/85237728/146660571-084ef6ce-1519-4069-a32c-6eb0da931009.png)
+
+
 daisyはServer_Personelのメンバーだ。
 
 ```
