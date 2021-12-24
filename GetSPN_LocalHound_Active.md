@@ -47,4 +47,4 @@ $krb5tgs$23$*Administrator$ACTIVE.HTB$active.htb/Administrator*$25bac967bc8a16..
 
   
 #### GetUserSPNs.py -> "TGS_REPRoasting"（存在するユーザ名とそのパスワード（それなりの権限が必要かも））
--> そのドメイン内のアカウントのクリデンシャルを知っていれば、それは普通にTGSに対して要求できるでしょ。（Activeの場合は、AdministratorがSPNに関連してたのがセキュリティホールかな）
+-> そのドメイン内のアカウントのクリデンシャルを知っていれば、それは普通にTGSに対して要求できるでしょ。で、その**TGS_REPにはSPNのハッシュが含まれている**。これをofflineでクラックすると。（Activeの場合は、AdministratorがSPNに関連してたのがセキュリティホールかな）
