@@ -39,3 +39,12 @@ $krb5tgs$23$*Administrator$ACTIVE.HTB$active.htb/Administrator*$25bac967bc8a16..
 ```
   
 注意）このハッシュは（**krb5tgs**）のhashcatでは「-m 13100」。ハッシュタイプ18200はAS_Repのハッシュ。
+
+  
+### GetNPUsers.pyとGetUserSPNs.pyについて
+#### GetNPUsers.py -> "AS_REPRoasting"（存在するユーザ名のみでOK）
+-> ASREPRoastingとは、ケルベロスチケットを要求する際にpre-authenticationを必要としないようなアカウントに対して、"Does not require Pre-Authentication"なる権限を持っている場合に起こる。
+
+  
+#### GetUserSPNs.py -> "TGS_REPRoasting"（存在するユーザ名とそのパスワード（それなりの権限が必要かも））
+-> そのドメイン内のアカウントのクリデンシャルを知っていれば、それは普通にTGSに対して要求できるでしょ。（Activeの場合は、AdministratorがSPNに関連してたのがセキュリティホールかな）
