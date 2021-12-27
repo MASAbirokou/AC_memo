@@ -106,6 +106,7 @@ PSDrive              : HKLM
 PSProvider           : Microsoft.PowerShell.Core\Registry
 ```
 
+注）kali側のsmbサーバの反応が少し遅いので、そこは動いてないと勘違いしないように！
 
 #### DNSを再起動：
 
