@@ -1,4 +1,5 @@
 c.f.) 
+- [Read Teaming Experiments](https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/from-dnsadmins-to-system-to-domain-compromise)
 - https://youtu.be/8KJebvmd1Fk
 - [日本語resolu手のwriteup](https://qiita.com/MarshMallow_sh/items/52e04ee4166c7b2b345c#dnsadmins%E6%A8%A9%E9%99%90%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E6%A8%A9%E9%99%90%E6%98%87%E6%A0%BC)
 - https://phackt.com/dnsadmins-group-exploitation-write-permissions
