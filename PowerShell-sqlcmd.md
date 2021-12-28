@@ -1,5 +1,9 @@
+（例）
+
 ```
 PS > sqlcmd -Q "select * from sys.database"
+
+PS> sqlcmd -Q "select name,create_data from sys.databases"
 ```
 
 `PowerUpSQL.ps1`を使ってもよい。
