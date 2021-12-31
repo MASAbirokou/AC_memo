@@ -1,3 +1,4 @@
+c.f.) [hacking deram](https://www.hackingdream.net/2021/04/active-directory-penetration-testing-cheatsheet.html)
 
 ``` powershell
 PS> Get-ADObject -filter 'isDeleted -eq $true -and name -ne "Deleted Objects"' -includeDeletedObjects
