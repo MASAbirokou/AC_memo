@@ -35,3 +35,8 @@ deleted objectを復活させる：
 ```
 PS> Restore-ADObject -Identity 'OBJECT-ID HERE'
 ```
+
+-> このboxでは**AD Recycle Bin**グループのメンバーだったにも関わらずInsufficient rightsでrestore出来なかった。（結局、見逃してたメールにAdminとTempAdminのパスワードが同じだと書いてあった）
+
+#### Cascadeで改めて実感
+できる人との違いは**enum力**だ！とにかくできる人はenum力がパナイ。今回もメールを見逃さず、現在のAdminのパスワードとTempAdminのパスワードが同じことを見逃さなかった。
