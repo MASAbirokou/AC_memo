@@ -1,6 +1,7 @@
 c.f.)
 - [hacking deram](https://www.hackingdream.net/2021/04/active-directory-penetration-testing-cheatsheet.html)
 - [offsec journey](https://notes.offsec-journey.com/active-directory/domain-privilege-escalation)
+- [MS official](https://docs.microsoft.com/en-us/powershell/module/activedirectory/restore-adobject?view=windowsserver2022-ps)
 
 ``` powershell
 PS> Get-ADObject -filter 'isDeleted -eq $true -and name -ne "Deleted Objects"' -includeDeletedObjects
