@@ -21,7 +21,7 @@ badPwdCount                     : 0
 CanonicalName                   : cascade.local/Deleted Objects/TempAdmin
 cascadeLegacyPwd                : YmFDVDNyMWFOMDBkbGVz
 CN                              : TempAdmin
-DistinguishedName               : CN=TempAdmin\0ADEL:f0cc344d-31e0-4866-bceb-a842791ca059,CN=Deleted Objects,DC=cascade,DC=local                                     ObjectGUID                      : f0cc344d-31e0-4866-bceb-a842791ca059                                                                                               
+DistinguishedName               : CN=TempAdmin\0ADEL:f0cc344d-31e0-4866-bceb-a842791ca059,CN=Deleted Objects,DC=cascade,DC=local
+ObjectGUID                      : f0cc344d-31e0-4866-bceb-a842791ca059
 userPrincipalName               : TempAdmin@cascade.local
-
 ```
