@@ -316,3 +316,19 @@ PsExec v2.2 - Execute processes remotely Copyright (C) 2001-2016 Mark Russinovic
 ```
 
 この**dc01**というのは、PowerViewの`Get-NetComputer`（<- Get a list of computers in current domain ）で表示されるような、他のマシンのこと。だから他のマシンのシェルを操作できるってこと！
+
+## Manualもやるべし！
+nmapとmanualのenum結果が違うこともよくある。何も良い情報が得られなかったらmanualでもやってみるべし！
+
+（例）例えばldapsearchとか、nmapとは違う情報が出た。（ldapsearchについては(ここ)[https://book.hacktricks.xyz/pentesting/pentesting-ldap]）
+
+```
+┌──(kali㉿kali)-[~]
+└─$ ldapsearch -x -h 10.10.10.182 -b "DC=cascade,DC=local" > search_result.xt
+
+┌──(kali㉿kali)-[~]
+└─$ grep -i "pwd" search_result.xt
+cascadeLegacyPwd: clk0bjVldmE=
+```
+
+
