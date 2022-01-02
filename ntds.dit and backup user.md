@@ -1,13 +1,15 @@
 ## ntds.ditとは？
 - **ドメインコントローラーの中でも最も重要なデータベースファイル**
 - All data in Active Directory is stored in the file **ntds.dit** (by default located in `C:\Windows\NTDS\`) on every domain controller. (c.f.[Ntds.dit Password Extraction(stealthbits)](https://attack.stealthbits.com/ntds-dit-security-active-directory))
-- Admin権限 or **backupユーザー** でれば見れるかも
+- Admin権限 or **backupユーザー** であれば見れるかも
 - **SeBackupPrivilege**が読むことを、**SeRestorePrivilege**が書き込むこと、この二つの権限があれば良い。
-- 場所：**C:\Windows\NTDS\ntds.dit**
+- ntds.ditの存在場所：**C:\Windows\NTDS\ntds.dit**
+- NTDSファイルをdecryptするためにはkeyが必要で、そのkeyは**system registry hive**なるレジストリに含まれている。-> `reg save hklm\system c:\temp\system`
 
 
 c.f.)
-- ここ良い！-> [Tha Hacker Recipies](https://www.thehacker.recipes/ad/movement/credentials/dumping/ntds)
+- 複数のやり方が書いてある -> [Tha Hacker Recipies](https://www.thehacker.recipes/ad/movement/credentials/dumping/ntds)
+- 実際にうまく動いた -> [Windows PrivEsc with SeBackupPrivilege](https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960)
 
 **SeBackupPrivilege**がある：
 
