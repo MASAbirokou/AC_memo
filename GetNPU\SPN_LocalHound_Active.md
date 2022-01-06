@@ -16,7 +16,7 @@ ASREPRoast攻撃により**Kerberos事前認証が不要**なユーザーを探�
 
 ```
 ┌──(kali㉿kali)-[~]
-└─$ hashcat -a 0 -m 18200 hashfile /usr/share/wordlists/rockyou.tx
+└─$ hashcat -a 0 -m 18200 hash /usr/share/wordlists/rockyou.txt
 ```
 
 ## Blood Hound from "LOCAL"
