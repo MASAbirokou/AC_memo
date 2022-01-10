@@ -130,3 +130,5 @@ PSProvider           : Microsoft.PowerShell.Core\Registry
 
 *Evil-WinRM* PS C:\Users\ryan> sc.exe \\Resolute.megabank.local start dns
 ```
+
+**（注）ペイロードの作り方で結果が全然違う！！！！architectureの指定とかplatform指定の有無とか。**
