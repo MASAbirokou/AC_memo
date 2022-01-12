@@ -3,6 +3,14 @@ c.f.)
 - [offsec journey](https://notes.offsec-journey.com/active-directory/domain-privilege-escalation)
 - [MS official](https://docs.microsoft.com/en-us/powershell/module/activedirectory/restore-adobject?view=windowsserver2022-ps)
 
+### Hack tricksのコマンド：
+
+``` powershell
+Get-ADObject -filter 'isDeleted -eq $true' -includeDeletedObjects -Properties *
+```
+
+
+
 ``` powershell
 PS> Get-ADObject -filter 'isDeleted -eq $true -and name -ne "Deleted Objects"' -includeDeletedObjects
 ...
