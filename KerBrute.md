@@ -1,7 +1,7 @@
 ## EnumUser
 
 ```
-./kerbrute userenum -v --dc <IP address> -d <Domain> <User list>
+./kerbrute userenum --dc <IP address> -d <Domain> <User list>
 ```
 
 ## BruteUser
