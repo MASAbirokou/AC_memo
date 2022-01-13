@@ -29,6 +29,17 @@ SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
 SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
 ```
 
+# 一番手っ取り早い方法
+
+[このスクリプト](https://github.com/Hackplayers/PsCabesha-tools/blob/master/Privesc/Acl-FullControl.ps1)を使う：
+
+
+![change_permission](https://user-images.githubusercontent.com/85237728/149320232-492d553b-6219-4981-b06c-5a81d6d61cac.png)
+
+
+`whoami`でsystemとは出ないが、確かにroot.txtが読めた。
+
+
 
 # 実際にやってみた（参考：[Windows PrivEsc with SeBackupPrivilege](https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960)）
 
