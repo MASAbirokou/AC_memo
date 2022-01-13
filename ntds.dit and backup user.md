@@ -36,8 +36,10 @@ SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
 
 ![change_permission](https://user-images.githubusercontent.com/85237728/149320232-492d553b-6219-4981-b06c-5a81d6d61cac.png)
 
+（**BLACKFIELD.local**はドメイン名。**svc_backup**はカレントユーザ）
 
-`whoami`でsystemとは出ないが、確かにroot.txtが読めた。
+
+`whoami`でsystemとは出ないが、確かにroot.txtが読めた。すなわちsystem権限を奪取した。
 
 
 
