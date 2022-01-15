@@ -29,3 +29,5 @@ PS C:\Users\tom> Set-DomainUserPassword -Identity claire -AccountPassword $UserP
 ┌──(kali㉿kali)-[~]
 └─$ sshpass -p 'Password123!' ssh cliare@10.10.10.77
 ```
+
+（`sshpass`は`sudo apt install sshpass`でダウンロード可能）
