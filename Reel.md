@@ -2,7 +2,7 @@
 
 tomは**WriteOwner**の権限をclaireに対して持ってる。
 
-![tom_priv](https://user-images.githubusercontent.com/85237728/149606075-736fe964-aea7-4bd0-a42d-a7ab5e606799.png)
+![スクリーンショット 2022-01-15 11 50 15](https://user-images.githubusercontent.com/85237728/149606210-4c9591c9-8ec9-4e90-9984-95899be437ad.png)
 
 claireのオーナーをtomに設定：
 
@@ -30,4 +30,4 @@ PS C:\Users\tom> Set-DomainUserPassword -Identity claire -AccountPassword $UserP
 └─$ sshpass -p 'Password123!' ssh cliare@10.10.10.77
 ```
 
-（`sshpass`は`sudo apt install sshpass`でダウンロード可能）
+（sshpassコマンドは`sudo apt install sshpass`でダウンロード可能）
