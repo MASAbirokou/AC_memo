@@ -31,3 +31,10 @@ PS C:\Users\tom> Set-DomainUserPassword -Identity claire -AccountPassword $UserP
 ```
 
 （sshpassコマンドは`sudo apt install sshpass`でダウンロード可能）
+
+
+
+ちなみにclaire->SYSTEMは...
+
+root.txtに目が行きすぎて気づかなかったけど、C:\Uses\Administrator\Backup Scripts っていうディレクトリがあることに昼飯食ってから気づいた。（これ一種のミスディレクションだよ。root.txtの
+真上にあったのにroot.txtに目が行きすぎて気づかなかった...。）
