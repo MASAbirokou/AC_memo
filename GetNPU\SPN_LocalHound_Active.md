@@ -5,7 +5,7 @@ ASREPRoast攻撃により**Kerberos事前認証が不要**なユーザーを探�
 ```
 # specific user 
 ┌──(kali㉿kali)-[~]
-└─$ GetNPUsers.py -no-pass -dc-ip 10.10.10.52 htb.local/mantis
+└─$ impacket-GetNPUsers.py -no-pass -dc-ip 10.10.10.52 htb.local/mantis
 
 # Using user list
 ┌──(kali㉿kali)-[~]
