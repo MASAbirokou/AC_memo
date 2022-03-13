@@ -24,3 +24,8 @@ https://github.com/dirkjanm/krbrelayx
 ![recorddump](https://user-images.githubusercontent.com/85237728/158055339-e4d87b10-ff68-48fb-90b8-41425177c9b7.png)
 
 -> 「type」ではなく「name」がレコード名（上の一行目の「type,name,value」より）
+
+## "webattack"っていう名前のA（タイプの）レコードをaddしてみた
+
+![webrec](https://user-images.githubusercontent.com/85237728/158056886-cb4f88ba-8aa8-4505-a7cc-4ee030ea40af.png)
+
