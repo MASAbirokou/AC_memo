@@ -24,7 +24,3 @@ https://github.com/dirkjanm/krbrelayx
 ![recorddump](https://user-images.githubusercontent.com/85237728/158055339-e4d87b10-ff68-48fb-90b8-41425177c9b7.png)
 
 -> 「type」ではなく「name」がレコード名（上の一行目の「type,name,value」より）
-
-## Aレコードをaddしてみた
-
-![addedArec](https://user-images.githubusercontent.com/85237728/158055798-d66b23e8-71c1-4e07-981f-04bf0198805c.png)
