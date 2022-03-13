@@ -23,9 +23,9 @@ ASREPRoast攻撃により**Kerberos事前認証が不要**なユーザーを探�
 
 ```
 ┌──(kali㉿kali)-[~]
-└─$ bloodhound-python -u <domain account> -p <account's password> -ns <target's IP> -d <Domain> -c Al
+└─$ bloodhound-python -u <domain account> -p <account's password> -ns <target's IP> -d <Domain> -c All
 
-(e.g.) $ loodhound-python -u svc_tgs -p GPPstillStandingStrong2k18 -ns 10.10.10.100 -d active.htb -c Al
+(e.g.) $ loodhound-python -u svc_tgs -p GPPstillStandingStrong2k18 -ns 10.10.10.100 -d active.htb -c All
 ```
 
 ## GetUserSPNs.py
