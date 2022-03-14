@@ -6,3 +6,11 @@ ReadGMSAPassword help:
 > An attacker with control of an authorized principal may abuse that privilege to impersonate the GMSA.
 
 上の画像では、SVC_INTがGroup Managed Service Accountである。そして、ITSUPPORTグループは、GMSAであるSVC_INTのパスワードをとれる！！
+
+# gMSADump.py
+
+https://github.com/micahvandeusen/gMSADumper
+
+![gmsadump](https://user-images.githubusercontent.com/85237728/158111017-d5ad67c1-505b-4b50-b1b4-659e42402ef0.png)
+
+
