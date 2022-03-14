@@ -9,3 +9,6 @@
 
 c.f.) https://wadcoms.github.io/wadcoms/Impacket-getST-Creds/
 
+```
+sudo ntpdate <target's IP>
+```
