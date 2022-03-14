@@ -26,3 +26,9 @@ getST.pyに関しては何通りかtrial-and-errorしてみる（SPNのservice�
 <br>
 
 そしたら、これを次のようにsecretsdump.pyに使う：
+
+![pwne](https://user-images.githubusercontent.com/85237728/158143997-85ebd27d-c660-4052-aafd-2a5575404894.png)
+
+動画でippsecも試行錯誤してたけど、おれもエラー出まくって色々trial-and-errorした。
+
+結局、原因は単純で俺が/etc/hostsにdc.intelligence.htbを記入してなかった。
