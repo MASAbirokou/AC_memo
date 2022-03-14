@@ -13,4 +13,4 @@ https://github.com/micahvandeusen/gMSADumper
 
 ![gmsadump](https://user-images.githubusercontent.com/85237728/158111017-d5ad67c1-505b-4b50-b1b4-659e42402ef0.png)
 
-
+**（注意）末尾の「$」マークもユーザ名に含まれてる**
