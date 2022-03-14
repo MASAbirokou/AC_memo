@@ -7,4 +7,4 @@ https://www.thehacker.recipes/ad/movement/kerberos/delegations/unconstrained
 > The constrained delegation privilege allows a principal to authenticate as any user to specific services on the target computer.
 > That is, a node with this privilege can impersonate any domain principal (including Domain Admins) to the specific service on the target host.
 
-上の画像で、SVC_INTがドメインコントローラに対してconstrained delegation privilegeを持っている。
+上の画像で、SVC_INTがドメインコントローラに対してconstrained delegation privilegeを持っている。で、SVC_INTはadminになりすます（impersonate）ことが出来る。
