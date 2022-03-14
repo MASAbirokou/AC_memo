@@ -6,3 +6,6 @@
 > That is, a node with this privilege can impersonate any domain principal (including Domain Admins) to the specific service on the target host.
 
 上の画像で、SVC_INTがドメインコントローラに対してconstrained delegation privilegeを持っている。で、SVC_INTはadminになりすます（impersonate）ことが出来る。
+
+c.f.) https://wadcoms.github.io/wadcoms/Impacket-getST-Creds/
+
