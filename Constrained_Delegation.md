@@ -12,3 +12,17 @@ c.f.) https://wadcoms.github.io/wadcoms/Impacket-getST-Creds/
 ```
 sudo ntpdate <target's IP>
 ```
+
+## impacket-getST.py
+
+[HTB-intelligence](https://youtu.be/Jg_BjkxdtsE?t=2673)
+
+ハッシュとしてgMSADumper.pyで得られたlmハッシュを続けて「09e5c4522742c318011036d6f73a0b86:09e5c4522742c318011036d6f73a0b86」と指定する。
+
+getST.pyに関しては何通りかtrial-and-errorしてみる（SPNのservice名、server名、ユーザ名末尾の"$"の有無）
+
+![getst](https://user-images.githubusercontent.com/85237728/158138674-f8408d91-8149-4100-8cde-196bf0232a86.png)
+
+<br>
+
+そしたら、これを次のようにsecretsdump.pyに使う：
