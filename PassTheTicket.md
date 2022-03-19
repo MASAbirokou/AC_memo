@@ -24,3 +24,5 @@ Aptではbruteforceした：
 c.f. https://www.thehacker.recipes/ad/movement/kerberos/ptk
 
 ![gotticket](https://user-images.githubusercontent.com/85237728/159119239-5d4bf0fc-c1ed-4e54-9b3c-d47a97ff4ae1.png)
+
+![klist](https://user-images.githubusercontent.com/85237728/159119325-89e415d6-1ce0-4296-930a-093bd0adb96d.png)
