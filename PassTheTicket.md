@@ -20,3 +20,5 @@ export KRB5CCNAME=/tmp/krb5cc_0
 Aptではbruteforceした：
 
 ![gettgtbrute](https://user-images.githubusercontent.com/85237728/159113359-050c0e98-259d-406a-aff3-7230cc59e61a.png)
+
+c.f. https://www.thehacker.recipes/ad/movement/kerberos/ptk
