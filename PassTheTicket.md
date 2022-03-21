@@ -11,8 +11,7 @@ impacket-getTGT -hashes <NTLM hash> -dc-ip <IP> <domain>/<username>
 その後、チケットがつくれてuser.ccacheに保存されたら、以下のようにチケットを登録する：
 
 ```
-cp user.ccache /tmp/krb5cc_0
-export KRB5CCNAME=/tmp/krb5cc_0
+export KRB5CCNAME=user.ccache
 ```
 
 チケットができたら、今までpass the hashでやっていたimpacketを、このチケットをつかって行えばよい（オプション **-no-pass -k**）。
