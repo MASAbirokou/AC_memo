@@ -25,7 +25,7 @@ APTやったときに、ハッシュが分かってるのに、pass the hashもp
 
 ippsec (APT): https://youtu.be/eRnqtXwCZVs?t=4051
 
-まだログインセッションがないから、HKCUでなくHKUをenum:
+まだログインセッションがないから、HKCUでなくHKUをenum（HKCUだと[-] Invalid root key HKCUとなる）:
 
 ![hkureg](https://user-images.githubusercontent.com/85237728/159431871-09c8ad6b-70c7-4c84-bd01-b2dacfa12a5b.png)
 
