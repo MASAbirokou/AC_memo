@@ -28,3 +28,5 @@ ippsec (APT): https://youtu.be/eRnqtXwCZVs?t=4051
 まだログインセッションがないから、HKCUでなくHKUをenum:
 
 ![hkureg](https://user-images.githubusercontent.com/85237728/159431871-09c8ad6b-70c7-4c84-bd01-b2dacfa12a5b.png)
+
+（＊）たとえ一回やってエラー出ても、続けてもう一回やればきちんと動く可能性あるから、一度のエラーで諦めるな
