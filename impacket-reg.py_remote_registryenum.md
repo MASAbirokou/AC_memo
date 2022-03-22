@@ -44,3 +44,10 @@ APTやったときに、ハッシュが分かってるのに、pass the hashもp
 ![hkureg](https://user-images.githubusercontent.com/85237728/159431871-09c8ad6b-70c7-4c84-bd01-b2dacfa12a5b.png)
 
 （＊）たとえ一回やってエラー出ても、続けてもう一回やればきちんと動く可能性あるから、一度のエラーで諦めるな
+
+### APTでやっとinitial shellがとれた瞬間：
+
+![initialshell](https://user-images.githubusercontent.com/85237728/159468911-7194f15f-836a-45b7-804f-139aefb96831.png)
+
+本当に、henry.vinsonのハッシュをブルートフォースでとって、正しいのにpass the hashとかなにもできない（insaneじゃなければここでinitial shellとれてるよ）。そこで新しい
+知識として **Remote Registry** のenumとなった。
