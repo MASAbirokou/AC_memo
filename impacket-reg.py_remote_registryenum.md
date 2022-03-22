@@ -15,7 +15,12 @@ c.f. https://soma-engineering.com/desktop/windows10/what-is-registry/2018/10/27/
 
 c.f. https://atmarkit.itmedia.co.jp/ait/articles/0402/21/news005.html
 
-
+- /v <Valuename>: 照会するレジストリ値の名前を指定する（省略するとkeyname のすべての値の名前が返される）
+- /ve: 値の名前が空のクエリを実行
+- /s: すべてのサブキーと値の名前を再帰的にクエリ
+  
+-> imapcket-regでは、`-keyName <key> -v | -ve | -s`、つまり`/`じゃなくて`-`
+  
 # impacket-reg.py
 
 -> Remote registry manipulation tool.
