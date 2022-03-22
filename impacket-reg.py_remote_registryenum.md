@@ -33,10 +33,11 @@ optional arguments:
 ```
 <br>
 
+- [about registry (HackTricks)](https://book.hacktricks.xyz/windows/windows-local-privilege-escalation/privilege-escalation-with-autorun-binaries#registry)
+- [ippsec (APT)](https://youtu.be/eRnqtXwCZVs?t=4051)
+
 APTやったときに、ハッシュが分かってるのに、pass the hashもpass the ticketもgolden ticketもover pass the hashも出来なかったとき、このリモート
 レジストリが希望となった。
-
-ippsec (APT): https://youtu.be/eRnqtXwCZVs?t=4051
 
 まだログインセッションがないから、HKCUでなくHKUをenum（HKCUだと[-] Invalid root key HKCUとなる）:
 
