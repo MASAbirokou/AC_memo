@@ -16,6 +16,8 @@ c.f. https://soma-engineering.com/desktop/windows10/what-is-registry/2018/10/27/
 
 -> Remote registry manipulation tool.
 
+（nessusもリモートレジストリのenumをする）
+
 <br>
 
 APTやったときに、ハッシュが分かってるのに、pass the hashもpass the ticketもgolden ticketもover pass the hashも出来なかったとき、このリモート
