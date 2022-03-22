@@ -15,18 +15,22 @@ c.f. https://soma-engineering.com/desktop/windows10/what-is-registry/2018/10/27/
 
 c.f. https://atmarkit.itmedia.co.jp/ait/articles/0402/21/news005.html
 
-- /v <Valuename>: 照会するレジストリ値の名前を指定する（省略するとkeyname のすべての値の名前が返される）
-- /ve: 値の名前が空のクエリを実行
-- /s: すべてのサブキーと値の名前を再帰的にクエリ
-  
--> imapcket-regでは、`-keyName <key> -v | -ve | -s`、つまり`/`じゃなくて`-`
-  
 # impacket-reg.py
 
 -> Remote registry manipulation tool.
 
 （nessusもリモートレジストリのenumをする）
+  
+```
+usage: reg.py target query [-h] -keyName KEYNAME [-v VALUENAME] [-ve] [-s]
 
+optional arguments:
+  -h, --help        show this help message and exit
+  -keyName KEYNAME  Specifies the full path of the subkey. The keyName must include a valid root key. Valid root keys for the local computer are: HKLM, HKU, HKCR.
+  -v VALUENAME      Specifies the registry value name that is to be queried. If omitted, all value names for keyName are returned.
+  -ve               Queries for the default value or empty value name
+  -s                Specifies to query all subkeys and value names recursively.
+```
 <br>
 
 APTやったときに、ハッシュが分かってるのに、pass the hashもpass the ticketもgolden ticketもover pass the hashも出来なかったとき、このリモート
