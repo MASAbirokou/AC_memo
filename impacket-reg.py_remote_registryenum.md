@@ -11,6 +11,10 @@
 
 c.f. https://soma-engineering.com/desktop/windows10/what-is-registry/2018/10/27/
 
+![wi-regcommandfig11](https://user-images.githubusercontent.com/85237728/159463179-4d183811-d171-4353-bf37-4b0fc156ebb1.png)
+
+c.f. https://atmarkit.itmedia.co.jp/ait/articles/0402/21/news005.html
+
 
 # impacket-reg.py
 
