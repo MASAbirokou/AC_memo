@@ -6,11 +6,6 @@
 - ntds.ditの存在場所：**C:\Windows\NTDS\ntds.dit**
 - NTDSファイルをdecryptするためにはkeyが必要で、そのkeyは**system registry hive**なるレジストリに含まれている。-> `reg save hklm\system c:\temp\system`
 
-
-c.f.)
-- 複数のやり方が書いてある -> [Tha Hacker Recipies](https://www.thehacker.recipes/ad/movement/credentials/dumping/ntds)
-- 実際にうまく動いた -> [Windows PrivEsc with SeBackupPrivilege](https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960)
-
 **SeBackupPrivilege**がある：
 
 ```
