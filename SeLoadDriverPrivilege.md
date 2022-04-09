@@ -64,3 +64,12 @@ The operation completed successfully.
 
 このboxではすでにSeLoadDriverPrivilegeの権限があったが、そうでない場合はこのレジストリの設定を行ったあとにEnableSeLoadDriverPrivilege.exe
 とかをつかって権限を付与してやる。
+
+# 結局何をしてるのか？（Comcomのドライバってなに？）
+
+Capcom.sysはドライバファイル、そしてこのドライバはユーザ空間で定義された関数を使ってカーネル空間でコード実行できる機能がある。
+
+それで、CapcomというドライバにおいてLPE（Local Privilege Escalation）の脆弱性及びエクスプロイトが公開されてる
+
+つまりSeLoadDriverPrivilegeの権限があれば、この脆弱なCapcomというドライバをロードできて、それに対するエクスプロイトを使えるということ。
+
