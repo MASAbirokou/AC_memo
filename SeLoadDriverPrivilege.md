@@ -7,7 +7,7 @@
 
 <br>
 
-**SeLoadDriverPrivilege**という権限があるから当たり前かのようにドライバのロードが出来る。
+**SeLoadDriverPrivilege**という権限があるからドライバのロードが出来る。
 
 # 使い方
 
