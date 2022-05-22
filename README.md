@@ -1,4 +1,4 @@
-# Active Directoryのペンテストに関するメモ
+# Active Directoryの攻撃に関するメモ
 
 Active Directory攻撃に関するメモです。
 
