@@ -266,6 +266,11 @@ Cached Tickets: (1)
 
 うまく行かない場合は、[Suportのwalkthrough](https://github.com/MASAbirokou/HTB_ADbox_walkthrough/blob/main/Support.md)にあるようにKali上で実行する。
 
+- Shared Support Accountsグループのメンバはターゲットコンピュータdc.support.htbに対して書き込み権限がある
+- 新たなコンピュータオブジェクトattackersystemを作る
+- dc.support.htbに対する書き込み権限を利用して、dc.support.htbの属性msDS-AllowdToActOnBehalOfOtherIdentityを設定する
+- どのように設定するかというとattackersystemがAdminを含む任意のユーザに偽装（Impersonate）・認証できるようように設定する
+- これによりdc.support.htbにアクセスできる
 
 # 参考
 
