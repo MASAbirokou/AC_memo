@@ -283,5 +283,5 @@ Cached Tickets: (1)
 - [解説動画あり]https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#genericall
 - [PENETRATION TESTING LAB](https://pentestlab.blog/2021/10/18/resource-based-constrained-delegation/)
 - [HackTricks](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/resource-based-constrained-delegation)
-
+- [delegationやkerberosに関するイラストあり](https://pentestbook.six2dez.com/post-exploitation/windows/ad/kerberos-attacks)
 
