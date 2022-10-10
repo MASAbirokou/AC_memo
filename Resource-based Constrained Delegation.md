@@ -273,6 +273,9 @@ Cached Tickets: (1)
 
 うまく行かない場合は、[Suportのwalkthrough](https://github.com/MASAbirokou/HTB_ADbox_walkthrough/blob/main/Support.md)にあるようにKali上で実行する。
 
+<br>
+
+[CIFS](https://cn.teldevice.co.jp/glossary/11927/#:~:text=Common%20Internet%20File%20System%E3%81%AE,%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E9%96%8B%E7%99%BA%E3%81%97%E3%81%9F%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%80%82)サービスのTGSをリクエストしから、`ls \\dc.support.htb\C$`とアクセスできる。
 
 
 # 参考
