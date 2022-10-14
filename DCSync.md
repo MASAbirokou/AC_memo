@@ -124,9 +124,3 @@ DCSync攻撃とは？...**自分がドメインコントローラになりすま
 ```
 
 を実行するとうまくいくかも（ここ：https://ranakhalil101.medium.com/hack-the-box-forest-writeup-w-o-metasploit-63070c9020e4 ではそうしてた。）
-
-あと、Noriaki Hayashiさんのwriteupではntlm relayをやってた。
-
-
-
-
