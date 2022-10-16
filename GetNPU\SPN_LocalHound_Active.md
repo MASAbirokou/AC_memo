@@ -29,7 +29,9 @@ ASREPRoast攻撃により**Kerberos事前認証が不要**なユーザーを探�
 ```
 
 ## GetUserSPNs.py
-指定したドメインアカウント下で動いてるSPN（Service Principal Name）を探す。
+（指定したドメインアカウント下で動いてるSPN（Service Principal Name）を探す。）
+
+Kerberoastableユーザのハッシュをとる。
 
 - -reqeust: TGS（サービスチケットを発行するサーバ）にリクエストを出す
 - -save: TGSを保存する（<username>.ccacheのフォーマット）
