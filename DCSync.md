@@ -108,6 +108,9 @@ nt authority\system
 
 DCSync攻撃とは？...**自分がドメインコントローラになりすますことでドメイン内のユーザハッシュが上記のように取れる。**
 
+”DCSyncの権限”という言葉ではなく、”DCSync”という攻撃の一種か。
+DCSyncできるユーザは、DS-Replication-Get-Changesの権限とDS-Replication-Get-Changes-Allの権限をもっているユーザ。
+
 ## 何度やってもできなかったら...
 
 ```
