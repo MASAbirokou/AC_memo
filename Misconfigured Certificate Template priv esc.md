@@ -73,3 +73,6 @@
  ```
  
  
+ 参考：
+ - [From Misconfigured Certificate Template to Domain Admin(Read Team Notes)](https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/from-misconfigured-certificate-template-to-domain-admin)
+ - [Misconfigured Certificate Templates - ESC1 (Hack Tricks)](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/ad-certificates/domain-escalation#misconfigured-certificate-templates-esc1)
