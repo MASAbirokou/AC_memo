@@ -1,3 +1,5 @@
+（Rubeus.exeとかCertify.exeは[Ghostpack-CompiledBinaries](https://github.com/r3motecontrol/Ghostpack-CompiledBinaries)にある）
+
 まずは脆弱なテンプレートがあるかをチェックする
 
 ```
@@ -69,3 +71,5 @@
                                       sequel\Domain Admins          S-1-5-21-4078382237-1492182817-2568127209-512
                                       sequel\Enterprise Admins      S-1-5-21-4078382237-1492182817-2568127209-5
  ```
+ 
+ 
