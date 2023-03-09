@@ -289,10 +289,17 @@ Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
 C:\>whoami
 sequel\administrator
 ```
+
+ECS1のテンプレートの特徴：
+- `msPKI-Certificates-Name-Flag: ENROLLEE_SUPPLIES_SUBJECT field` -> このテンプレートに基づいて新しいcertificateをリクエストするユーザは、administratorを含め
+他のユーザに対するcertificateをリクエストできる
+- `PkiExtendedKeyUsage: Client Authentication` -> このテンプレートに基づいて作られるcertificateは、AD内のコンピュータへのauthenticationに使用することができる
+- `Enrollment Rights: NT Authority\Authenticated Users` -> AD内のすべてのユーザは、このテンプレートに基づいて新しいcertificateをリクエストすることが許されている
+
  
  参考：
  - [From Misconfigured Certificate Template to Domain Admin(Read Team Notes)](https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/from-misconfigured-certificate-template-to-domain-admin)
  - [Misconfigured Certificate Templates - ESC1 (Hack Tricks)](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/ad-certificates/domain-escalation#misconfigured-certificate-templates-esc1)
 
 bloodhound, winpeas, adPEAS等々色々やったが、privescのできそうになく、最終的に上記の方法でprivescした。なお、certipy（certipy-ad）を使ってすべてKali上でやろう
-としたがpythonのエラーがでてうまくいかんかった
+としたがpythonのエラーがでてうまくいかんかった。ちなみに、CVE-2022-26923は、コンピュータの追加ができないような設定だったので通用しなかった。
