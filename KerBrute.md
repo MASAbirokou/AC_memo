@@ -1,3 +1,5 @@
+instal binary from https://github.com/ropnop/kerbrute/releases/tag/v1.0.3
+
 ## EnumUser
 
 ```
